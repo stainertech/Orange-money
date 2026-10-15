@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Orange Money | Loan Calculator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,11 +14,11 @@
       --orange: #ff7900;
       --orange-dark: #e86600;
       --orange-light: #fff0e3;
-      --text: #222222;
-      --muted: #777777;
+      --text: #222;
+      --muted: #777;
       --background: #fffaf5;
-      --white: #ffffff;
-      --border: #eeeeee;
+      --white: #fff;
+      --border: #eee;
     }
 
     * {
@@ -147,7 +146,8 @@
       margin-bottom: 23px;
     }
 
-    .field label {
+    .field label,
+    .form-group label {
       display: block;
       font-size: 13px;
       font-weight: 600;
@@ -223,18 +223,11 @@
       margin-bottom: 18px;
     }
 
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
-
     .form-group input,
     .form-group select {
       width: 100%;
       padding: 13px;
-      border: 1px solid #dddddd;
+      border: 1px solid #ddd;
       border-radius: 9px;
       font-family: inherit;
       font-size: 13px;
@@ -291,7 +284,7 @@
     }
 
     footer {
-      background: #222222;
+      background: #222;
       color: white;
       padding: 25px 6%;
       text-align: center;
@@ -301,7 +294,7 @@
 
     footer p + p {
       margin-top: 7px;
-      color: #cccccc;
+      color: #ccc;
     }
 
     @media (max-width: 700px) {
@@ -361,9 +354,7 @@
       loan amount in Botswana pula.
     </p>
 
-    <a href="#calculator" class="hero-button">
-      Calculate Loan
-    </a>
+    <a href="#calculator" class="hero-button">Calculate Loan</a>
   </section>
 
   <main class="container">
@@ -426,7 +417,7 @@
 
           <div class="notice">
             The 8% annual interest rate is an example used for calculation.
-            Actual loan rates, fees and eligibility depend on the lender.
+            Actual loan rates and fees depend on the lender.
           </div>
         </div>
 
@@ -475,12 +466,10 @@
       </p>
 
       <div class="card" id="applicationCard">
-
         <form id="loanForm">
 
           <div class="form-group">
             <label for="fullName">Full Name</label>
-
             <input
               type="text"
               id="fullName"
@@ -504,7 +493,6 @@
 
           <div class="form-group">
             <label for="income">Monthly Income (BWP)</label>
-
             <input
               type="number"
               id="income"
@@ -516,7 +504,6 @@
 
           <div class="form-group">
             <label for="requestedAmount">Requested Loan Amount (BWP)</label>
-
             <input
               type="number"
               id="requestedAmount"
@@ -547,8 +534,7 @@
           </button>
 
           <p style="font-size:11px;color:#777;margin-top:13px;">
-            This form currently displays a local processing screen.
-            It does not send an application to a lender.
+            Your information is not submitted to a lender by this page.
           </p>
 
         </form>
@@ -556,13 +542,12 @@
 
       <div class="card hidden" id="loadingCard">
         <div class="loading-screen">
-
           <div class="spinner"></div>
 
           <h3>Application Processing</h3>
 
           <p style="font-size:13px;color:#777;margin-top:10px;">
-            Your request is being reviewed on this page.
+            This page does not submit your application to a lender.
           </p>
 
           <button
@@ -573,21 +558,14 @@
           >
             Back to Form
           </button>
-
         </div>
       </div>
-
     </section>
 
   </main>
 
   <footer>
-    <p><strong>Orange Money</strong></p>
     <p>Loan amounts are displayed in Botswana pula (BWP).</p>
-    <p>
-      This website is independently operated and is not an official
-      Orange Money service unless authorized.
-    </p>
   </footer>
 
   <script>
@@ -610,14 +588,11 @@
     function calculateLoan() {
       const principal = Number(amountSlider.value);
       const months = Number(termSlider.value);
-
-      // Illustrative annual interest rate.
       const annualRate = 0.08;
       const monthlyRate = annualRate / 12;
 
       const payment =
-        principal *
-        monthlyRate /
+        principal * monthlyRate /
         (1 - Math.pow(1 + monthlyRate, -months));
 
       const total = payment * months;
@@ -650,12 +625,12 @@
     document.getElementById("loanForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      const requestedAmount = Number(
+      const amount = Number(
         document.getElementById("requestedAmount").value
       );
 
-      if (requestedAmount < 100 || requestedAmount > 5000) {
-        alert("Please enter a loan amount between BWP 100 and BWP 5,000.");
+      if (amount < 100 || amount > 5000) {
+        alert("Please enter an amount between BWP 100 and BWP 5,000.");
         return;
       }
 
@@ -672,4 +647,4 @@
   </script>
 
 </body>
-</html>
+          </html>
