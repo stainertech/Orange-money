@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange Money | Loan Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #222;
+      background: #f5f6f8;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      background: #fff;
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 2px 8px #0000000d;
+    }
+
+    .logo {
+      color: #f47721;
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 16px;
+      font-size: 14px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #f47721, #ff9a35);
+      color: white;
+      padding: 55px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 32px;
+    }
+
+    .hero p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 24px;
+      margin-bottom: 22px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px #0000000b;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 16px 0 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6d6d6;
+      border-radius: 7px;
+      font-size: 16px;
+      background: #fff;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 7px;
+      padding: 14px;
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #f47721;
+      color: white;
+    }
+
+    button:hover {
+      background: #df6415;
+    }
+
+    .secondary-button {
+      background: #333;
+    }
+
+    .secondary-button:hover {
+      background: #111;
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff4e9;
+      line-height: 1.8;
+    }
+
+    .notice {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    footer {
+      padding: 25px 16px;
+      text-align: center;
+      background: #252525;
+      color: white;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Loading screen */
+    #loadingCard {
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    .spinner {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 20px;
+      border: 5px solid #ffe1cd;
+      border-top-color: #f47721;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Full-screen second page */
+    #secondScreen {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: auto;
+      background: #fff;
+      z-index: 99999;
+    }
+
+    .second-header {
+      background: #f47721;
+      color: white;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .second-content {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    .placeholder {
+      padding: 22px;
+      border: 1px dashed #ccc;
+      border-radius: 10px;
+      line-height: 1.7;
+      color: #555;
+      background: #fafafa;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+      }
+
+      nav a {
+        margin: 0 7px;
+      }
+
+      .hero h1 {
+        font-size: 27px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .second-content {
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Orange Money</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#application">Apply</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Quick and Easy Loans</h1>
+    <p>
+      Calculate your estimated repayment and complete the application form.
+    </p>
+  </section>
+
+  <main class="container">
+
+    <section class="card" id="calculator">
+      <h2>Loan Calculator</h2>
+
+      <label for="calcAmount">Loan amount (BWP)</label>
+      <input
+        type="number"
+        id="calcAmount"
+        min="100"
+        max="5000"
+        value="1000"
+      >
+
+      <label for="loanPeriod">Repayment period</label>
+      <select id="loanPeriod">
+        <option value="1">1 month</option>
+        <option value="3">3 months</option>
+        <option value="6">6 months</option>
+        <option value="12">12 months</option>
+      </select>
+
+      <button type="button" onclick="calculateLoan()">
+        Calculate Repayment
+      </button>
+
+      <div class="result" id="calculationResult">
+        Enter an amount to calculate your estimated repayment.
+      </div>
+
+      <p class="notice">
+        This calculator provides an estimate for demonstration purposes.
+        Confirm any applicable interest and fees before accepting a loan.
+      </p>
+    </section>
+
+    <section class="card" id="application">
+      <div id="applicationCard">
+        <h2>Loan Application</h2>
+
+        <form id="loanForm">
+          <label for="fullName">Full name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Enter your full name"
+            required
+          >
+
+          <label for="phoneNumber">Phone number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            placeholder="Enter your phone number"
+            required
+          >
+
+          <label for="requestedAmount">Requested amount (BWP)</label>
+          <input
+            type="number"
+            id="requestedAmount"
+            name="requestedAmount"
+            min="100"
+            max="5000"
+            placeholder="Enter an amount from 100 to 5000"
+            required
+          >
+
+          <label for="applicationPeriod">Repayment period</label>
+          <select id="applicationPeriod" name="applicationPeriod" required>
+            <option value="">Select repayment period</option>
+            <option value="1">1 month</option>
+            <option value="3">3 months</option>
+            <option value="6">6 months</option>
+            <option value="12">12 months</option>
+          </select>
+
+          <button type="submit">Submit Application</button>
+
+          <p class="notice">
+            Demo page: submitting this form does not send an application to
+            a financial institution.
+          </p>
+        </form>
+      </div>
+
+      <div id="loadingCard" class="hidden">
+        <div class="spinner"></div>
+        <h2>Please wait</h2>
+        <p>Wait as we submit your application...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Orange Money | Loan Calculator</p>
+    <p>Demonstration website. Not an official financial service.</p>
+  </footer>
+
+  <!-- SECOND PAGE: Replace the placeholder content with your next page's
+       compatible HTML when it is ready. -->
+  <section id="secondScreen" class="hidden">
+    <div class="second-header">
+      Second Page
+    </div>
+
+    <div class="second-content">
+      <h2>Next Page</h2>
+
+      <div class="placeholder">
+        Your second page's content will appear here.
+
+        <p>
+          Once you provide the next page's code, its compatible design can
+          be placed here while keeping this full-screen transition.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function calculateLoan() {
+      const amount = Number(
+        document.getElementById("calcAmount").value
+      );
+
+      const months = Number(
+        document.getElementById("loanPeriod").value
+      );
+
+      const result = document.getElementById("calculationResult");
+
+      if (!Number.isFinite(amount) || amount < 100 || amount > 5000) {
+        result.textContent =
+          "Please enter an amount between BWP 100 and BWP 5,000.";
+        return;
+      }
+
+      // Illustrative estimate only; this is not an official loan quote.
+      const estimatedInterestRate = 0.05;
+      const total = amount * (1 + estimatedInterestRate);
+      const monthlyPayment = total / months;
+
+      result.innerHTML =
+        "<strong>Requested amount:</strong> BWP " +
+        amount.toFixed(2) +
+        "<br><strong>Illustrative total:</strong> BWP " +
+        total.toFixed(2) +
+        "<br><strong>Estimated monthly payment:</strong> BWP " +
+        monthlyPayment.toFixed(2) +
+        "<br><small>Uses an illustrative 5% total charge, not an official offer.</small>";
+    }
+
+    document
+      .getElementById("loanForm")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const amount = Number(
+          document.getElementById("requestedAmount").value
+        );
+
+        if (!Number.isFinite(amount) || amount < 100 || amount > 5000) {
+          alert(
+            "Please enter an amount between BWP 100 and BWP 5,000."
+          );
+          return;
+        }
+
+        document
+          .getElementById("applicationCard")
+          .classList.add("hidden");
+
+        document
+          .getElementById("loadingCard")
+          .classList.remove("hidden");
+
+        setTimeout(function() {
+          document
+            .querySelector("header")
+            .classList.add("hidden");
+
+          document
+            .querySelector(".hero")
+            .classList.add("hidden");
+
+          document
+            .querySelector("main.container")
+            .classList.add("hidden");
+
+          document
+            .querySelector("footer")
+            .classList.add("hidden");
+
+          document
+            .getElementById("secondScreen")
+            .classList.remove("hidden");
+        }, 3000);
+      });
+
+    calculateLoan();
+  </script>
+
+</body>
+  </html>
