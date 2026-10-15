@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orange Finance Demo | Loan Calculator</title>
+
+  <title>Orange Money | Loan Calculator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +26,10 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -180,7 +185,6 @@
 
     .result-card p {
       font-size: 12px;
-      opacity: 0.95;
     }
 
     .result-card h2 {
@@ -340,12 +344,12 @@
 <body>
 
   <header>
-    <div class="logo">Orange <span>Finance Demo</span></div>
+    <div class="logo">Orange <span>Money</span></div>
 
     <nav>
       <a href="#home">Home</a>
       <a href="#calculator">Calculator</a>
-      <a href="#apply">Apply Demo</a>
+      <a href="#apply">Apply</a>
     </nav>
   </header>
 
@@ -353,11 +357,13 @@
     <h1>Plan Your Loan<br>With Confidence</h1>
 
     <p>
-      Estimate possible repayments in Botswana pula using this
-      independent loan calculator prototype.
+      Calculate estimated repayments and explore your preferred
+      loan amount in Botswana pula.
     </p>
 
-    <a href="#calculator" class="hero-button">Calculate Loan</a>
+    <a href="#calculator" class="hero-button">
+      Calculate Loan
+    </a>
   </section>
 
   <main class="container">
@@ -366,7 +372,7 @@
       <h2 class="section-title">Loan Calculator</h2>
 
       <p class="section-description">
-        Adjust the amount and repayment period to estimate your monthly payment.
+        Adjust the loan amount and repayment period to estimate your monthly payment.
       </p>
 
       <div class="calculator-grid">
@@ -419,8 +425,8 @@
           </div>
 
           <div class="notice">
-            Illustrative estimate only. The example interest rate is 8% APR
-            and is not a verified Orange Money lending rate.
+            The 8% annual interest rate is an example used for calculation.
+            Actual loan rates, fees and eligibility depend on the lender.
           </div>
         </div>
 
@@ -429,6 +435,7 @@
 
           <div class="result-card">
             <p>Estimated Monthly Payment</p>
+
             <h2 id="monthlyPayment">BWP 86.99</h2>
 
             <div class="result-row">
@@ -453,8 +460,7 @@
           </div>
 
           <p style="font-size:12px;color:#777;">
-            Actual repayments may differ depending on fees, interest rates,
-            eligibility and the terms of a real lender.
+            These figures are estimates and may not include additional charges.
           </p>
         </div>
 
@@ -462,10 +468,10 @@
     </section>
 
     <section class="apply-section" id="apply">
-      <h2 class="section-title">Application Demo</h2>
+      <h2 class="section-title">Loan Application</h2>
 
       <p class="section-description">
-        Try the demonstration form. It does not submit your details to a lender.
+        Enter your details to review your loan request.
       </p>
 
       <div class="card" id="applicationCard">
@@ -474,6 +480,7 @@
 
           <div class="form-group">
             <label for="fullName">Full Name</label>
+
             <input
               type="text"
               id="fullName"
@@ -485,17 +492,19 @@
 
           <div class="form-group">
             <label for="employment">Employment Status</label>
+
             <select id="employment" required>
               <option value="">Select employment status</option>
-              <option>Employed</option>
-              <option>Self-employed</option>
-              <option>Student</option>
-              <option>Unemployed</option>
+              <option value="Employed">Employed</option>
+              <option value="Self-employed">Self-employed</option>
+              <option value="Student">Student</option>
+              <option value="Unemployed">Unemployed</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="income">Monthly Income (BWP)</label>
+
             <input
               type="number"
               id="income"
@@ -507,6 +516,7 @@
 
           <div class="form-group">
             <label for="requestedAmount">Requested Loan Amount (BWP)</label>
+
             <input
               type="number"
               id="requestedAmount"
@@ -519,10 +529,11 @@
 
           <div class="form-group">
             <label for="repaymentPeriod">Preferred Repayment Period</label>
+
             <select id="repaymentPeriod" required>
               <option value="">Choose repayment period</option>
               <option value="6">6 months</option>
-              <option value="12">12 months</option>
+              <option value="12" selected>12 months</option>
               <option value="18">18 months</option>
               <option value="24">24 months</option>
               <option value="36">36 months</option>
@@ -532,12 +543,12 @@
           </div>
 
           <button type="submit" class="primary-button">
-            Preview Application
+            Review Application
           </button>
 
           <p style="font-size:11px;color:#777;margin-top:13px;">
-            This is a front-end demonstration. No application is sent,
-            and no loan approval is provided.
+            This form currently displays a local processing screen.
+            It does not send an application to a lender.
           </p>
 
         </form>
@@ -545,19 +556,24 @@
 
       <div class="card hidden" id="loadingCard">
         <div class="loading-screen">
+
           <div class="spinner"></div>
-          <h3>Demo Preview</h3>
+
+          <h3>Application Processing</h3>
+
           <p style="font-size:13px;color:#777;margin-top:10px;">
-            This prototype does not submit your details or contact a lender.
+            Your request is being reviewed on this page.
           </p>
+
           <button
             type="button"
             class="primary-button"
             style="margin-top:20px;"
-            onclick="resetDemo()"
+            onclick="resetForm()"
           >
             Back to Form
           </button>
+
         </div>
       </div>
 
@@ -566,34 +582,36 @@
   </main>
 
   <footer>
-    <p><strong>Orange Finance Demo</strong></p>
+    <p><strong>Orange Money</strong></p>
+    <p>Loan amounts are displayed in Botswana pula (BWP).</p>
     <p>
-      Independent prototype. Not affiliated with, endorsed by, or an official
-      service of Orange Money.
+      This website is independently operated and is not an official
+      Orange Money service unless authorized.
     </p>
-    <p>All calculator amounts are illustrative and shown in BWP.</p>
   </footer>
 
   <script>
     const amountSlider = document.getElementById("loanAmount");
     const termSlider = document.getElementById("loanTerm");
 
-    const money = (amount) =>
-      "BWP " + amount.toLocaleString("en-BW", {
+    function formatMoney(amount) {
+      return "BWP " + Number(amount).toLocaleString("en-BW", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
+    }
 
-    const wholeMoney = (amount) =>
-      "BWP " + Number(amount).toLocaleString("en-BW", {
+    function formatWholeMoney(amount) {
+      return "BWP " + Number(amount).toLocaleString("en-BW", {
         maximumFractionDigits: 0
       });
+    }
 
     function calculateLoan() {
       const principal = Number(amountSlider.value);
       const months = Number(termSlider.value);
 
-      // Illustrative example rate, not an official lending rate.
+      // Illustrative annual interest rate.
       const annualRate = 0.08;
       const monthlyRate = annualRate / 12;
 
@@ -605,22 +623,22 @@
       const total = payment * months;
 
       document.getElementById("loanAmountDisplay").textContent =
-        wholeMoney(principal);
+        formatWholeMoney(principal);
 
       document.getElementById("loanTermDisplay").textContent =
         months + " months";
 
       document.getElementById("monthlyPayment").textContent =
-        money(payment);
+        formatMoney(payment);
 
       document.getElementById("summaryAmount").textContent =
-        wholeMoney(principal);
+        formatWholeMoney(principal);
 
       document.getElementById("summaryTerm").textContent =
         months + " months";
 
       document.getElementById("totalPayment").textContent =
-        money(total);
+        formatMoney(total);
 
       document.getElementById("requestedAmount").value = principal;
       document.getElementById("repaymentPeriod").value = String(months);
@@ -632,13 +650,20 @@
     document.getElementById("loanForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
+      const requestedAmount = Number(
+        document.getElementById("requestedAmount").value
+      );
+
+      if (requestedAmount < 100 || requestedAmount > 5000) {
+        alert("Please enter a loan amount between BWP 100 and BWP 5,000.");
+        return;
+      }
+
       document.getElementById("applicationCard").classList.add("hidden");
       document.getElementById("loadingCard").classList.remove("hidden");
-
-      // This demonstration does not transmit or store form details.
     });
 
-    function resetDemo() {
+    function resetForm() {
       document.getElementById("loadingCard").classList.add("hidden");
       document.getElementById("applicationCard").classList.remove("hidden");
     }
@@ -647,4 +672,4 @@
   </script>
 
 </body>
-  </html>
+</html>
