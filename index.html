@@ -1,24 +1,338 @@
-<div class="field">
-    <label for="mobile">Test phone number</label>
-    <input
-        type="tel"
-        id="mobile"
-        placeholder="+263 7XXXXXXXX"
-        pattern="\+2637[0-9]{8}"
-        autocomplete="off"
-        required>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Calculator</title>
 
-<div class="field">
-    <label for="pin">Demo PIN</label>
-    <input
-        type="password"
-        id="pin"
-        placeholder="Enter a demo PIN"
-        inputmode="numeric"
-        minlength="4"
-        maxlength="4"
-        pattern="[0-9]{4}"
-        autocomplete="off"
-        required>
-</div>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    width: 100%;
+    min-height: 70px;
+    padding: 18px 6%;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.brand {
+    color: #ff6600;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.status {
+    color: #687386;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+}
+
+.page {
+    width: 100%;
+    max-width: 430px;
+    padding: 36px 28px;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 15px 50px rgba(26, 39, 65, .09);
+    animation: appear .35s ease-out;
+}
+
+h1 {
+    text-align: center;
+    color: #172033;
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.description {
+    text-align: center;
+    color: #788195;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.field {
+    margin-bottom: 21px;
+}
+
+label {
+    display: block;
+    color: #30394c;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+input, select {
+    width: 100%;
+    min-height: 54px;
+    border: 1px solid #e0e5ed;
+    border-radius: 12px;
+    padding: 0 15px;
+    background: #fafbfe;
+    color: #172033;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, .1);
+}
+
+button {
+    width: 100%;
+    min-height: 54px;
+    border: none;
+    border-radius: 12px;
+    background: #ff6600;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover {
+    background: #e85b00;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #ffe0c9;
+    border-top: 5px solid #ff6600;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+    margin: 25px auto 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 12px;
+    color: #8a93a3;
+    font-size: 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar {
+        padding: 16px 18px;
+    }
+
+    .page {
+        padding: 30px 22px;
+        border-radius: 19px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+}
+
+@media (max-height: 650px) {
+    .main {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .page {
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+
+    .field {
+        margin-bottom: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top-bar">
+    <div class="brand">Loan Calculator</div>
+    <div class="status">Application Portal</div>
+</header>
+
+<main class="main">
+
+    <!-- PAGE ONE: LOAN APPLICATION -->
+    <section class="page" id="applicationPage">
+        <h1>Plan Your Loan</h1>
+
+        <p class="description">
+            Enter your details to review your loan application.
+        </p>
+
+        <form id="applicationForm">
+
+            <div class="field">
+                <label for="fullName">Full Name</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required>
+            </div>
+
+            <div class="field">
+                <label for="employment">Employment Status</label>
+                <select id="employment" required>
+                    <option value="">Select employment status</option>
+                    <option value="employed">Employed</option>
+                    <option value="self-employed">Self-employed</option>
+                    <option value="student">Student</option>
+                    <option value="unemployed">Unemployed</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="income">Monthly Income (BWP)</label>
+                <input
+                    type="number"
+                    id="income"
+                    placeholder="Enter monthly income"
+                    min="0"
+                    required>
+            </div>
+
+            <div class="field">
+                <label for="amount">Requested Loan Amount (BWP)</label>
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Enter loan amount"
+                    min="100"
+                    max="5000"
+                    step="100"
+                    required>
+            </div>
+
+            <div class="field">
+                <label for="term">Repayment Period</label>
+                <select id="term" required>
+                    <option value="">Select repayment period</option>
+                    <option value="6">6 months</option>
+                    <option value="12">12 months</option>
+                    <option value="18">18 months</option>
+                    <option value="24">24 months</option>
+                    <option value="36">36 months</option>
+                    <option value="48">48 months</option>
+                    <option value="60">60 months</option>
+                </select>
+            </div>
+
+            <button type="submit">Review Application</button>
+        </form>
+    </section>
+
+    <!-- PAGE TWO: LOADING SCREEN -->
+    <section class="page hidden" id="loadingPage">
+        <h1>Processing</h1>
+        <div class="loader" aria-label="Loading"></div>
+    </section>
+
+    <!-- PAGE THREE: NEXT-STEP PLACEHOLDER -->
+    <section class="page hidden" id="nextPage">
+        <h1>Next Step</h1>
+
+        <p class="description">
+            The next step of this demo will be added here.
+        </p>
+    </section>
+
+</main>
+
+<footer class="footer">
+    Independent loan calculator demo. Amounts are shown in Botswana pula (BWP).
+</footer>
+
+<script>
+const applicationForm =
+    document.getElementById("applicationForm");
+
+const applicationPage =
+    document.getElementById("applicationPage");
+
+const loadingPage =
+    document.getElementById("loadingPage");
+
+const nextPage =
+    document.getElementById("nextPage");
+
+applicationForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const amount = Number(
+        document.getElementById("amount").value
+    );
+
+    if (amount < 100 || amount > 5000) {
+        alert("Enter a loan amount between BWP 100 and BWP 5,000.");
+        return;
+    }
+
+    applicationPage.classList.add("hidden");
+    loadingPage.classList.remove("hidden");
+
+    setTimeout(function() {
+        loadingPage.classList.add("hidden");
+        nextPage.classList.remove("hidden");
+    }, 3000);
+});
+</script>
+
+</body>
+    </html>
