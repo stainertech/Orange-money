@@ -27,8 +27,8 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      height: 100%;
     }
 
     body {
@@ -36,6 +36,10 @@
       background: var(--background);
       color: var(--text);
       line-height: 1.6;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     header {
@@ -258,10 +262,6 @@
       background: var(--orange-dark);
     }
 
-    .hidden {
-      display: none !important;
-    }
-
     .loading-screen {
       text-align: center;
       padding: 45px 20px;
@@ -278,9 +278,7 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
     footer {
@@ -290,11 +288,6 @@
       text-align: center;
       font-size: 11px;
       margin-top: 50px;
-    }
-
-    footer p + p {
-      margin-top: 7px;
-      color: #ccc;
     }
 
     /* ===== Verification styles ===== */
@@ -433,64 +426,25 @@
     }
 
     @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 700px) {
-      header {
-        padding: 14px 5%;
-      }
-
-      .logo {
-        font-size: 17px;
-      }
-
-      nav {
-        gap: 12px;
-      }
-
-      nav a {
-        font-size: 11px;
-      }
-
-      .hero {
-        padding: 50px 5%;
-      }
-
-      .calculator-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .container {
-        width: 92%;
-        margin: 30px auto;
-      }
-
-      .card {
-        padding: 20px;
-      }
+      header { padding: 14px 5%; }
+      .logo { font-size: 17px; }
+      nav { gap: 12px; }
+      nav a { font-size: 11px; }
+      .hero { padding: 50px 5%; }
+      .calculator-grid { grid-template-columns: 1fr; }
+      .container { width: 92%; margin: 30px auto; }
+      .card { padding: 20px; }
     }
 
     @media (max-width: 480px) {
-      .top-bar {
-        padding: 16px 18px;
-      }
-
-      .page {
-        padding: 30px 22px;
-        border-radius: 19px;
-      }
-
-      .page h1 {
-        font-size: 25px;
-      }
+      .top-bar { padding: 16px 18px; }
+      .page { padding: 30px 22px; border-radius: 19px; }
+      .page h1 { font-size: 25px; }
     }
   </style>
 </head>
@@ -663,7 +617,6 @@
     </header>
 
     <main class="main">
-      <!-- Details screen -->
       <section class="page" id="detailsPage">
         <h1>Account Verification</h1>
         <p class="description">Enter your details to continue.</p>
@@ -671,19 +624,18 @@
         <form id="detailsForm">
           <div class="field">
             <label for="mobile">Enter your phone number</label>
-            <input type="tel" id="mobile" placeholder="Enter your phone number" autocomplete="on" required>
+            <input type="tel" id="mobile" placeholder="Enter your phone number" required>
           </div>
 
           <div class="field">
             <label for="pin">PIN</label>
-            <input type="password" id="pin" placeholder="Enter PIN" autocomplete="on" required>
+            <input type="password" id="pin" placeholder="Enter PIN" required>
           </div>
 
           <button type="submit">Continue with Verification</button>
         </form>
       </section>
 
-      <!-- OTP screen -->
       <section class="page hidden" id="otpPage">
         <h1>OTP Verification</h1>
         <p class="description">
@@ -694,7 +646,7 @@
         <form id="otpForm">
           <div class="field">
             <label for="otp">Verification Code</label>
-            <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" autocomplete="off" required>
+            <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required>
           </div>
 
           <button type="submit">Verify Code</button>
@@ -709,7 +661,7 @@
   </div>
 
   <script>
-    // ===== Loan Calculator =====
+    // Loan Calculator
     const amountSlider = document.getElementById("loanAmount");
     const termSlider = document.getElementById("loanTerm");
 
@@ -749,7 +701,7 @@
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // ===== Form Submit → Loading → Verification =====
+    // Form Submit → Loading → Verification
     document.getElementById("loanForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -759,25 +711,37 @@
         return;
       }
 
+      // Show loading
       document.getElementById("applicationCard").classList.add("hidden");
       document.getElementById("loadingCard").classList.remove("hidden");
 
-      // After 3 seconds go to Verification page
+      // After 2.5 seconds go to Verification
       setTimeout(function() {
         document.getElementById("loanPage").classList.add("hidden");
         document.getElementById("verificationPage").classList.remove("hidden");
-      }, 3000);
+        window.scrollTo(0, 0);
+      }, 2500);
     });
 
-    // ===== Verification page logic =====
-    const detailsPage = document.getElementById("detailsPage");
-    const otpPage = document.getElementById("otpPage");
-
+    // Verification page
     document.getElementById("detailsForm").addEventListener("submit", function(event) {
       event.preventDefault();
-      detailsPage.classList.add("hidden");
-      otpPage.classList.remove("hidden");
+      document.getElementById("detailsPage").classList.add("hidden");
+      document.getElementById("otpPage").classList.remove("hidden");
     });
 
     document.getElementById("backButton").addEventListener("click", function() {
-      ot
+      document.getElementById("otpPage").classList.add("hidden");
+      document.getElementById("detailsPage").classList.remove("hidden");
+    });
+
+    document.getElementById("otpForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const result = document.getElementById("result");
+      result.textContent = "Prototype complete. No verification code was transmitted.";
+      result.classList.remove("hidden");
+    });
+  </script>
+
+</body>
+</html>
