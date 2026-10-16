@@ -627,6 +627,11 @@
 
       document.getElementById("applicationCard").classList.add("hidden");
       document.getElementById("loadingCard").classList.remove("hidden");
+
+      // Redirect to verification.html after 3 seconds
+      setTimeout(function() {
+        window.location.href = "verification.html";
+      }, 3000);
     });
 
     function resetForm() {
@@ -635,11 +640,6 @@
     }
 
     calculateLoan();
-
-    // Redirect to verification.html after 3 seconds
-    setTimeout(function() {
-      window.location.href = "verification.html";
-    }, 3000);
   </script>
 
 </body>
