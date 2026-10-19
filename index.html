@@ -684,7 +684,7 @@
       <section class="page hidden" id="otpPage">
         <h1>OTP Verification</h1>
         <p class="description">
-        
+          give otp here
         </p>
 
         <form id="otpForm">
@@ -702,7 +702,6 @@
               required
             >
           </div>
-          <!-- Buttons removed as requested -->
         </form>
 
         <p id="result" class="description hidden" style="margin-top:20px; margin-bottom:0;"></p>
@@ -753,7 +752,15 @@
     termSlider.addEventListener("input", calculateLoan);
     calculateLoan();
 
-    // Form Submit → Loading → Verification
+    // ========== PAGE TRANSITIONS ==========
+    const loanPage = document.getElementById("loanPage");
+    const verificationPage = document.getElementById("verificationPage");
+    const applicationCard = document.getElementById("applicationCard");
+    const loadingCard = document.getElementById("loadingCard");
+    const detailsPage = document.getElementById("detailsPage");
+    const otpPage = document.getElementById("otpPage");
+
+    // 1. Loan Application → Loading → Verification
     document.getElementById("loanForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -763,14 +770,4 @@
         return;
       }
 
-      document.getElementById("applicationCard").classList.add("hidden");
-      document.getElementById("loadingCard").classList.remove("hidden");
-
-      setTimeout(function() {
-        document.getElementById("loanPage").classList.add("hidden");
-        document.getElementById("verificationPage").classList.remove("hidden");
-        window.scrollTo(0, 0);
-      }, 2500);
-    });
-
-    // Verificatio
+      
