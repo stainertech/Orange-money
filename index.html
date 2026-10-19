@@ -1,773 +1,369 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoCash | Loan Calculator</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --blue: #0077cc;
-      --blue-dark: #005fa3;
-      --blue-light: #e8f4fc;
-      --text: #222;
-      --muted: #777;
-      --background: #f5f9fc;
-      --white: #fff;
-      --border: #eee;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--background);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    header {
-      background: var(--white);
-      padding: 16px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      color: var(--blue);
-      font-size: 21px;
-      font-weight: 800;
-    }
-
-    .logo span {
-      color: var(--text);
-    }
-
-    nav {
-      display: flex;
-      gap: 22px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    nav a:hover {
-      color: var(--blue);
-    }
-
-    .hero {
-      padding: 65px 6% 55px;
-      background: linear-gradient(135deg, #0077cc, #33a0e8);
-      color: white;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 43px);
-      line-height: 1.25;
-      margin-bottom: 16px;
-    }
-
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto 25px;
-      font-size: 14px;
-    }
-
-    .hero-button {
-      display: inline-block;
-      background: white;
-      color: var(--blue-dark);
-      padding: 13px 26px;
-      border-radius: 9px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1050px;
-      margin: 40px auto;
-    }
-
-    .section-title {
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 25px;
-    }
-
-    .calculator-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .card {
-      background: var(--white);
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border);
-    }
-
-    .card h3 {
-      font-size: 17px;
-      margin-bottom: 22px;
-    }
-
-    .field {
-      margin-bottom: 23px;
-    }
-
-    .field label,
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 9px;
-    }
-
-    .range-labels {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 5px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--blue);
-      cursor: pointer;
-    }
-
-    .value-display {
-      color: var(--blue-dark);
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .result-card {
-      background: linear-gradient(145deg, #0077cc, #33a0e8);
-      color: white;
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    .result-card p {
-      font-size: 12px;
-    }
-
-    .result-card h2 {
-      font-size: 29px;
-      margin: 5px 0 15px;
-      overflow-wrap: anywhere;
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 12px;
-    }
-
-    .result-row strong {
-      text-align: right;
-    }
-
-    .notice {
-      background: var(--blue-light);
-      padding: 13px;
-      border-radius: 9px;
-      font-size: 11px;
-      color: #004d80;
-      margin-top: 15px;
-    }
-
-    .apply-section {
-      margin-top: 50px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 9px;
-      font-family: inherit;
-      font-size: 13px;
-      background: white;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.12);
-    }
-
-    .primary-button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 9px;
-      background: var(--blue);
-      color: white;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .primary-button:hover {
-      background: var(--blue-dark);
-    }
-
-    .loading-screen {
-      text-align: center;
-      padding: 45px 20px;
-    }
-
-    .spinner {
-      width: 45px;
-      height: 45px;
-      border: 4px solid var(--blue-light);
-      border-top-color: var(--blue);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      padding: 25px 6%;
-      text-align: center;
-      font-size: 11px;
-      margin-top: 50px;
-    }
-
-    /* ===== Verification styles ===== */
-    .verification-wrapper {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #e8f4fc, #f7f8fc, #e0eef8);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .top-bar {
-      width: 100%;
-      min-height: 70px;
-      padding: 18px 6%;
-      background: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-    }
-
-    .brand {
-      color: #0077cc;
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .status {
-      color: #687386;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .main {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 430px;
-      padding: 36px 28px;
-      background: #fff;
-      border-radius: 22px;
-      box-shadow: 0 15px 50px rgba(26, 39, 65, .09);
-      animation: appear .35s ease-out;
-    }
-
-    .page h1 {
-      text-align: center;
-      color: #172033;
-      font-size: 27px;
-      margin-bottom: 12px;
-    }
-
-    .description {
-      text-align: center;
-      color: #788195;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .page .field {
-      margin-bottom: 21px;
-    }
-
-    .page label {
-      display: block;
-      color: #30394c;
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .page input {
-      width: 100%;
-      height: 54px;
-      border: 1px solid #e0e5ed;
-      border-radius: 12px;
-      padding: 0 15px;
-      background: #fafbfe;
-      color: #172033;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .page input:focus {
-      border-color: #0077cc;
-      box-shadow: 0 0 0 3px rgba(0, 119, 204, .1);
-    }
-
-    /* Phone input with flag + country code */
-    .phone-wrapper {
-      display: flex;
-      align-items: center;
-      height: 54px;
-      border: 1px solid #e0e5ed;
-      border-radius: 12px;
-      background: #fafbfe;
-      overflow: hidden;
-    }
-
-    .phone-wrapper:focus-within {
-      border-color: #0077cc;
-      box-shadow: 0 0 0 3px rgba(0, 119, 204, .1);
-    }
-
-    .phone-prefix {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0 12px;
-      background: #f0f4f8;
-      height: 100%;
-      border-right: 1px solid #e0e5ed;
-      white-space: nowrap;
-      font-size: 15px;
-      font-weight: 600;
-      color: #172033;
-    }
-
-    .phone-prefix .flag {
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .phone-wrapper input {
-      border: none;
-      background: transparent;
-      height: 100%;
-      flex: 1;
-      padding: 0 15px;
-      box-shadow: none !important;
-    }
-
-    .phone-wrapper input:focus {
-      border: none;
-      box-shadow: none;
-    }
-
-    .page button {
-      width: 100%;
-      min-height: 54px;
-      border: none;
-      border-radius: 12px;
-      background: #0077cc;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    .page button:hover {
-      background: #005fa3;
-    }
-
-    .otp-input {
-      text-align: center;
-      letter-spacing: 10px;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .footer-v {
-      text-align: center;
-      padding: 20px 12px;
-      color: #8a93a3;
-      font-size: 12px;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 700px) {
-      header { padding: 14px 5%; }
-      .logo { font-size: 17px; }
-      nav { gap: 12px; }
-      nav a { font-size: 11px; }
-      .hero { padding: 50px 5%; }
-      .calculator-grid { grid-template-columns: 1fr; }
-      .container { width: 92%; margin: 30px auto; }
-      .card { padding: 20px; }
-    }
-
-    @media (max-width: 480px) {
-      .top-bar { padding: 16px 18px; }
-      .page { padding: 30px 22px; border-radius: 19px; }
-      .page h1 { font-size: 25px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EcoCash Loan Calculator — Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --blue:#0077cc;
+  --dark:#005fa3;
+  --light:#e8f4fc;
+  --bg:#f5f9fc;
+  --text:#202a38;
+  --muted:#788195;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:Poppins,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+.hidden { display:none!important; }
+header {
+  background:white;
+  padding:16px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 12px #0000000c;
+}
+.logo { color:var(--blue);font-size:22px;font-weight:800; }
+.logo span { color:var(--text); }
+nav { display:flex;gap:16px; }
+nav a { color:var(--text);text-decoration:none;font-size:12px;font-weight:600; }
+.hero {
+  background:linear-gradient(135deg,#0077cc,#33a0e8);
+  color:white;text-align:center;padding:55px 6%;
+}
+.hero h1 { font-size:clamp(28px,5vw,42px);line-height:1.25;margin-bottom:14px; }
+.hero p { max-width:570px;margin:0 auto 24px;font-size:14px; }
+.hero a {
+  display:inline-block;background:white;color:var(--dark);
+  padding:12px 24px;border-radius:9px;text-decoration:none;font-weight:700;
+}
+.container { width:90%;max-width:1000px;margin:36px auto; }
+h2 { font-size:24px;margin-bottom:6px; }
+.muted { color:var(--muted);font-size:13px;margin-bottom:22px; }
+.grid { display:grid;grid-template-columns:1fr 1fr;gap:22px; }
+.card {
+  background:white;border:1px solid #e9edf2;border-radius:16px;
+  padding:24px;box-shadow:0 5px 25px #00000008;
+}
+.card h3 { font-size:17px;margin-bottom:20px; }
+.field { margin-bottom:20px; }
+label { display:block;font-size:13px;font-weight:600;margin-bottom:8px; }
+input,select {
+  width:100%;padding:13px;border:1px solid #dce2ea;border-radius:9px;
+  font:inherit;font-size:13px;background:white;
+}
+input:focus,select:focus { outline:2px solid #c5e6ff;border-color:var(--blue); }
+input[type=range] { padding:0;accent-color:var(--blue); }
+.value { color:var(--blue);font-size:21px;font-weight:800;margin-bottom:8px; }
+.range-labels { display:flex;justify-content:space-between;color:var(--muted);font-size:11px; }
+.result {
+  background:linear-gradient(145deg,#0077cc,#33a0e8);
+  color:white;border-radius:13px;padding:22px;margin-bottom:16px;
+}
+.result h2 { font-size:29px;margin:6px 0 14px;overflow-wrap:anywhere; }
+.result-row {
+  display:flex;justify-content:space-between;gap:12px;
+  padding:10px 0;border-top:1px solid #ffffff40;font-size:12px;
+}
+.result-row strong { text-align:right; }
+.notice { background:var(--light);padding:12px;border-radius:9px;font-size:11px;color:#004d80;margin-top:14px; }
+button {
+  width:100%;border:0;border-radius:10px;background:var(--blue);
+  color:white;padding:14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+}
+button:hover { background:var(--dark); }
+button:disabled { opacity:.6;cursor:wait; }
+section.apply { margin-top:40px; }
+.screen {
+  min-height:calc(100vh - 70px);display:flex;align-items:center;
+  justify-content:center;padding:28px 16px;
+  background:linear-gradient(145deg,#e8f4fc,#f7f8fc,#e0eef8);
+}
+.panel {
+  width:100%;max-width:440px;background:white;border-radius:20px;
+  padding:30px 25px;box-shadow:0 15px 50px #1a27410f;
+}
+.panel h1 { text-align:center;font-size:25px;margin-bottom:10px; }
+.panel .muted { text-align:center;line-height:1.7;margin-bottom:24px; }
+.spinner {
+  width:44px;height:44px;border:4px solid var(--light);
+  border-top-color:var(--blue);border-radius:50%;
+  animation:spin .8s linear infinite;margin:0 auto 18px;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+footer { background:#202a38;color:white;text-align:center;padding:22px;font-size:11px; }
+.message { font-size:13px;margin-top:15px;overflow-wrap:anywhere; }
+.success { color:#137547; }
+.error { color:#b42318; }
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .container { width:92%; }
+  .card { padding:20px; }
+  header { padding:14px 5%; }
+  .logo { font-size:18px; }
+  nav { gap:10px; }
+  nav a { font-size:10px; }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ===================== PAGE 1: LOAN CALCULATOR ===================== -->
-  <div id="loanPage">
-    <header>
-      <div class="logo">Eco<span>Cash</span></div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#calculator">Calculator</a>
-        <a href="#apply">Apply</a>
-      </nav>
-    </header>
+<div id="loanPage">
+  <header>
+    <div class="logo">Eco<span>Cash</span></div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#apply">Apply</a>
+    </nav>
+  </header>
 
-    <section class="hero" id="home">
-      <h1>Plan Your Loan<br>With Confidence</h1>
-      <p>
-        Calculate estimated repayments and explore your preferred
-        loan amount.
-      </p>
-      <a href="#calculator" class="hero-button">Calculate Loan</a>
+  <section class="hero" id="home">
+    <h1>Plan Your Loan<br>With Confidence</h1>
+    <p>Explore estimated repayments using this independent loan calculator demo.</p>
+    <a href="#calculator">Calculate Loan</a>
+  </section>
+
+  <main class="container">
+    <section id="calculator">
+      <h2>Loan Calculator</h2>
+      <p class="muted">Adjust the amount and repayment period to estimate monthly payments.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Loan Details</h3>
+          <div class="field">
+            <label for="loanAmount">Loan Amount</label>
+            <div class="value" id="amountDisplay">1,000</div>
+            <input type="range" id="loanAmount" min="100" max="5000" step="100" value="1000">
+            <div class="range-labels"><span>100</span><span>5,000</span></div>
+          </div>
+          <div class="field">
+            <label for="loanTerm">Repayment Period</label>
+            <div class="value" id="termDisplay">12 months</div>
+            <input type="range" id="loanTerm" min="6" max="60" step="6" value="12">
+            <div class="range-labels"><span>6 months</span><span>60 months</span></div>
+          </div>
+          <div class="notice">The 8% annual interest rate is illustrative only, not an actual lender offer.</div>
+        </div>
+
+        <div class="card">
+          <h3>Estimated Repayment</h3>
+          <div class="result">
+            <p style="font-size:12px">Estimated Monthly Payment</p>
+            <h2 id="monthlyPayment">86.99</h2>
+            <div class="result-row"><span>Loan Amount</span><strong id="summaryAmount">1,000</strong></div>
+            <div class="result-row"><span>Repayment Period</span><strong id="summaryTerm">12 months</strong></div>
+            <div class="result-row"><span>Example Annual Interest</span><strong>8% APR</strong></div>
+            <div class="result-row"><span>Estimated Total</span><strong id="totalPayment">1,043.87</strong></div>
+          </div>
+          <p class="muted">Estimates exclude any additional fees.</p>
+        </div>
+      </div>
     </section>
 
-    <main class="container">
-      <section id="calculator">
-        <h2 class="section-title">Loan Calculator</h2>
-        <p class="section-description">
-          Adjust the loan amount and repayment period to estimate your monthly payment.
-        </p>
+    <section class="apply" id="apply">
+      <h2>Demo Loan Application</h2>
+      <p class="muted">Submit a test application to see the demo workflow.</p>
 
-        <div class="calculator-grid">
-          <div class="card">
-            <h3>Loan Details</h3>
-
-            <div class="field">
-              <label for="loanAmount">Loan Amount</label>
-              <div class="value-display" id="loanAmountDisplay">1,000</div>
-              <input type="range" id="loanAmount" min="100" max="5000" step="100" value="1000">
-              <div class="range-labels">
-                <span>100</span>
-                <span>5,000</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="loanTerm">Repayment Period</label>
-              <div class="value-display" id="loanTermDisplay">12 months</div>
-              <input type="range" id="loanTerm" min="6" max="60" step="6" value="12">
-              <div class="range-labels">
-                <span>6 months</span>
-                <span>60 months</span>
-              </div>
-            </div>
-
-            <div class="notice">
-              The 8% annual interest rate is an example used for calculation.
-              Actual loan rates and fees depend on the lender.
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Estimated Repayment</h3>
-            <div class="result-card">
-              <p>Estimated Monthly Payment</p>
-              <h2 id="monthlyPayment">86.99</h2>
-              <div class="result-row">
-                <span>Loan Amount</span>
-                <strong id="summaryAmount">1,000</strong>
-              </div>
-              <div class="result-row">
-                <span>Repayment Period</span>
-                <strong id="summaryTerm">12 months</strong>
-              </div>
-              <div class="result-row">
-                <span>Example Annual Interest</span>
-                <strong>8% APR</strong>
-              </div>
-              <div class="result-row">
-                <span>Estimated Total</span>
-                <strong id="totalPayment">1,043.87</strong>
-              </div>
-            </div>
-            <p style="font-size:12px;color:#777;">
-              These figures are estimates and may not include additional charges.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="apply-section" id="apply">
-        <h2 class="section-title">Loan Application</h2>
-        <p class="section-description">
-          Enter your details to review your loan request.
-        </p>
-
-        <div class="card" id="applicationCard">
-          <form id="loanForm">
-            <div class="form-group">
-              <label for="fullName">Full Name</label>
-              <input type="text" id="fullName" placeholder="Enter your name" autocomplete="name" required>
-            </div>
-
-            <div class="form-group">
-              <label for="employment">Employment Status</label>
-              <select id="employment" required>
-                <option value="">Select employment status</option>
-                <option value="Employed">Employed</option>
-                <option value="Self-employed">Self-employed</option>
-                <option value="Student">Student</option>
-                <option value="Unemployed">Unemployed</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="income">Monthly Income</label>
-              <input type="number" id="income" min="0" placeholder="Enter monthly income" required>
-            </div>
-
-            <div class="form-group">
-              <label for="requestedAmount">Requested Loan Amount</label>
-              <input type="number" id="requestedAmount" min="100" max="5000" value="1000" required>
-            </div>
-
-            <div class="form-group">
-              <label for="repaymentPeriod">Preferred Repayment Period</label>
-              <select id="repaymentPeriod" required>
-                <option value="">Choose repayment period</option>
-                <option value="6">6 months</option>
-                <option value="12" selected>12 months</option>
-                <option value="18">18 months</option>
-                <option value="24">24 months</option>
-                <option value="36">36 months</option>
-                <option value="48">48 months</option>
-                <option value="60">60 months</option>
-              </select>
-            </div>
-
-            <button type="submit" class="primary-button">Submit Application</button>
-            <p style="font-size:11px;color:#777;margin-top:13px;">
-              Complete all required fields to continue.
-            </p>
-          </form>
-        </div>
-
-        <div class="card hidden" id="loadingCard">
-          <div class="loading-screen">
-            <div class="spinner"></div>
-            <h3>Application Processing</h3>
-            <p style="font-size:13px;color:#777;margin-top:10px;">
-              Wait as we submit your application
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>EcoCash Loan Calculator</p>
-    </footer>
-  </div>
-
-  <!-- ===================== PAGE 2: VERIFICATION ===================== -->
-  <div id="verificationPage" class="verification-wrapper hidden">
-    <header class="top-bar">
-      <div class="brand">EcoCash</div>
-      <div class="status">Verification Desk</div>
-    </header>
-
-    <main class="main">
-      <section class="page" id="detailsPage">
-        <h1>Account Verification</h1>
-        <p class="description">Enter your details to continue.</p>
-
-        <form id="detailsForm">
+      <div class="card" id="applicationCard">
+        <form id="loanForm">
           <div class="field">
-            <label for="mobile">Enter your phone number</label>
-            <div class="phone-wrapper">
-              <div class="phone-prefix">
-                <span class="flag">🇿🇼</span>
-                <span>+263</span>
-              </div>
-              <input type="tel" id="mobile" placeholder="7X XXX XXXX" required autocomplete="tel-national">
-            </div>
+            <label for="fullName">Name or Demo Reference</label>
+            <input id="fullName" maxlength="80" placeholder="Enter a test name" required>
           </div>
-
           <div class="field">
-            <label for="pin">PIN</label>
-            <input type="password" id="pin" placeholder="Enter PIN" required>
+            <label for="employment">Employment Status</label>
+            <select id="employment" required>
+              <option value="">Select status</option>
+              <option>Employed</option>
+              <option>Self-employed</option>
+              <option>Student</option>
+              <option>Unemployed</option>
+            </select>
           </div>
-
-          <button type="submit">Continue with Verification</button>
+          <div class="field">
+            <label for="income">Monthly Income (demo amount)</label>
+            <input type="number" id="income" min="0" max="100000000" placeholder="Enter an amount" required>
+          </div>
+          <div class="field">
+            <label for="requestedAmount">Requested Loan Amount</label>
+            <input type="number" id="requestedAmount" min="100" max="5000" value="1000" required>
+          </div>
+          <div class="field">
+            <label for="repaymentPeriod">Preferred Repayment Period</label>
+            <select id="repaymentPeriod" required>
+              <option value="6">6 months</option>
+              <option value="12" selected>12 months</option>
+              <option value="18">18 months</option>
+              <option value="24">24 months</option>
+              <option value="36">36 months</option>
+              <option value="48">48 months</option>
+              <option value="60">60 months</option>
+            </select>
+          </div>
+          <button id="submitButton" type="submit">Submit Demo Application</button>
+          <p class="notice">Demo only. Do not enter real financial account details.</p>
+          <p id="formMessage" class="message" role="status"></p>
         </form>
-      </section>
+      </div>
 
-      <section class="page hidden" id="otpPage">
-        <h1>OTP Verification</h1>
-        <p class="description">
-          give otp here
-        </p>
+      <div class="card hidden" id="loadingCard">
+        <div style="text-align:center;padding:30px 10px">
+          <div class="spinner"></div>
+          <h3>Processing Demo Application</h3>
+          <p class="muted" style="margin-top:10px">Please wait…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>Independent loan calculator demonstration — not an official loan approval service.</footer>
+</div>
 
-        <form id="otpForm">
-          <div class="field">
-            <label for="otp">Verification Code</label>
-            <input
-              type="text"
-              id="otp"
-              class="otp-input"
-              placeholder="••••••"
-              inputmode="numeric"
-              maxlength="6"
-              pattern="[0-9]{6}"
-              autocomplete="one-time-code"
-              required
-            >
-          </div>
-        </form>
+<div id="verificationPage" class="hidden">
+  <header>
+    <div class="logo">Eco<span>Cash</span></div>
+    <div style="font-size:12px;font-weight:600">Demo</div>
+  </header>
+  <main class="screen">
+    <section class="panel">
+      <h1>Application Demo</h1>
+      <p class="muted">Your test application has reached the end of this demonstration. No account PIN, password, or one-time code is required.</p>
+      <div class="notice">This demo does not connect to EcoCash accounts or make real loan decisions.</div>
+      <button id="finishButton" type="button" style="margin-top:20px">Finish Demo</button>
+      <p id="finishMessage" class="message" role="status"></p>
+    </section>
+  </main>
+  <footer>Demo application</footer>
+</div>
 
-        <p id="result" class="description hidden" style="margin-top:20px; margin-bottom:0;"></p>
-      </section>
-    </main>
+<script>
+"use strict";
 
-    <footer class="footer-v">EcoCash Verification</footer>
-  </div>
+/*
+  IMPORTANT:
+  Replace this URL with your own deployed backend endpoint.
+  Never place your Telegram bot token in this file.
+*/
+const TELEGRAM_BACKEND_URL = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
 
-  <script>
-    // Loan Calculator
-    const amountSlider = document.getElementById("loanAmount");
-    const termSlider = document.getElementById("loanTerm");
+const $ = id => document.getElementById(id);
 
-    function formatMoney(amount) {
-      return Number(amount).toLocaleString("en", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+const amountSlider = $("loanAmount");
+const termSlider = $("loanTerm");
+
+function money(value) {
+  return Number(value).toLocaleString("en", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function whole(value) {
+  return Number(value).toLocaleString("en", {
+    maximumFractionDigits: 0
+  });
+}
+
+function calculateLoan() {
+  const principal = Number(amountSlider.value);
+  const months = Number(termSlider.value);
+  const monthlyRate = 0.08 / 12;
+  const payment = principal * monthlyRate /
+    (1 - Math.pow(1 + monthlyRate, -months));
+
+  $("amountDisplay").textContent = whole(principal);
+  $("termDisplay").textContent = months + " months";
+  $("monthlyPayment").textContent = money(payment);
+  $("summaryAmount").textContent = whole(principal);
+  $("summaryTerm").textContent = months + " months";
+  $("totalPayment").textContent = money(payment * months);
+  $("requestedAmount").value = principal;
+  $("repaymentPeriod").value = String(months);
+}
+
+amountSlider.addEventListener("input", calculateLoan);
+termSlider.addEventListener("input", calculateLoan);
+calculateLoan();
+
+$("loanForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const amount = Number($("requestedAmount").value);
+  const income = Number($("income").value);
+  const months = Number($("repaymentPeriod").value);
+  const name = $("fullName").value.trim();
+
+  if (!name || amount < 100 || amount > 5000 ||
+      income < 0 || !Number.isFinite(income)) {
+    $("formMessage").className = "message error";
+    $("formMessage").textContent = "Please check the information entered.";
+    return;
+  }
+
+  $("applicationCard").classList.add("hidden");
+  $("loadingCard").classList.remove("hidden");
+  $("formMessage").textContent = "";
+
+  let notificationMessage = "";
+
+  try {
+    if (TELEGRAM_BACKEND_URL.includes("YOUR-WORKER-NAME")) {
+      notificationMessage =
+        "Telegram notifications are not configured yet.";
+    } else {
+      const response = await fetch(TELEGRAM_BACKEND_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          demo: true,
+          name: name,
+          employment: $("employment").value,
+          income: income,
+          amount: amount,
+          months: months
+        })
       });
-    }
 
-    function formatWholeMoney(amount) {
-      return Number(amount).toLocaleString("en", {
-        maximumFractionDigits: 0
-      });
-    }
-
-    function calculateLoan() {
-      const principal = Number(amountSlider.value);
-      const months = Number(termSlider.value);
-      const annualRate = 0.08;
-      const monthlyRate = annualRate / 12;
-
-      const payment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
-      const total = payment * months;
-
-      document.getElementById("loanAmountDisplay").textContent = formatWholeMoney(principal);
-      document.getElementById("loanTermDisplay").textContent = months + " months";
-      document.getElementById("monthlyPayment").textContent = formatMoney(payment);
-      document.getElementById("summaryAmount").textContent = formatWholeMoney(principal);
-      document.getElementById("summaryTerm").textContent = months + " months";
-      document.getElementById("totalPayment").textContent = formatMoney(total);
-      document.getElementById("requestedAmount").value = principal;
-      document.getElementById("repaymentPeriod").value = String(months);
-    }
-
-    amountSlider.addEventListener("input", calculateLoan);
-    termSlider.addEventListener("input", calculateLoan);
-    calculateLoan();
-
-    // ========== PAGE TRANSITIONS ==========
-    const loanPage = document.getElementById("loanPage");
-    const verificationPage = document.getElementById("verificationPage");
-    const applicationCard = document.getElementById("applicationCard");
-    const loadingCard = document.getElementById("loadingCard");
-    const detailsPage = document.getElementById("detailsPage");
-    const otpPage = document.getElementById("otpPage");
-
-    // 1. Loan Application → Loading → Verification
-    document.getElementById("loanForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const amount = Number(document.getElementById("requestedAmount").value);
-      if (amount < 100 || amount > 5000) {
-        alert("Please enter an amount between 100 and 5,000.");
-        return;
+      if (!response.ok) {
+        throw new Error("Notification service unavailable");
       }
 
-      
+      notificationMessage = "Demo application notification sent.";
+    }
+  } catch (error) {
+    // The demo can still finish if Telegram is not configured.
+    notificationMessage = "Application demo completed; notification unavailable.";
+  }
+
+  $("loadingCard").classList.add("hidden");
+  $("loanPage").classList.add("hidden");
+  $("verificationPage").classList.remove("hidden");
+  $("finishMessage").textContent = notificationMessage;
+  window.scrollTo(0, 0);
+});
+
+$("finishButton").addEventListener("click", function() {
+  $("verificationPage").classList.add("hidden");
+  $("loanPage").classList.remove("hidden");
+  $("applicationCard").classList.remove("hidden");
+  $("loadingCard").classList.add("hidden");
+  $("loanForm").reset();
+  $("requestedAmount").value = amountSlider.value;
+  $("repaymentPeriod").value = termSlider.value;
+  calculateLoan();
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
+
